@@ -7,4 +7,6 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Először szórjuk össze a login űrlapot.
+Csináljuk meg a feldolgozót, ami ellenőrzi a jelszót.
+
+&#8730; Először szórjuk össze a login űrlapot.
