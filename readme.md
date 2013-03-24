@@ -7,7 +7,22 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Tegyünk prefix-et minden egyes függvényhez, hogy lássuk, melyik függvény melyik réteghez tartozik. Így újra felhasználható lesz egy-egy függvény név.
+Tegyük át névterekbe és osztályokba a mostani kódot, és írjunk hozzá autoloader-t. Úgy jobban követhetőek lesznek a függőségi viszonyok.
+
+&#10005; Csináljunk felhasználóbarát hibaüzenetet arról, hogy miért nem működött a bejelentkezés, vagy bármi egyéb. Loggoljuk a hibákat.
+
+    Minden függvény false-t ad vissza hiba esetén, ezt viszont csak nagyon sok munkával lehetne átírni használhatóra.
+    A kivételeket, try-catch blokkot az oo programozásban pont erre találták ki, szóval felesleges feltalálni a spanyol viaszt.
+
+&#10005; Csináljunk autoloader-t, hogy ne kelljen kiírni a require-t minden függőséghez. Így a fájlok tetszőleges logika szerint áthelyezhetőek lesznek.
+
+    Php-ben csak osztályokra működik az autoload-er. Így viszont ha bármi változik a könyvtárszerkezetben, akkor minden require-t egyesével át kell írni.
+    Előbb, vagy utóbb túl nagyok lesznek a rétegek fájljai, szét kell bontani őket, és rengeteg require-t át kell majd írni emiatt.
+
+&#10005; Tegyünk prefix-et minden egyes függvényhez, hogy lássuk, melyik függvény melyik réteghez tartozik. Ennek további előnye, hogy újra felhasználható lesz egy-egy függvény név tőle, ill. hogy ránézésre tudjuk mit hol keressünk.
+
+    Nagyon hamar kiderül, hogy ez nem járható út, mert nagyon hosszú függvénynevek lesznek.
+    Előbb, vagy utóbb viszont elfogynak a felhasznált nevek, úgyhogy muszáj lesz névtereket vagy osztályokat használni.
 
 &#8730; Csináljunk front controller-t, hogy újra tudjuk hasznosítani a require sorokat a wwwroot-ban lévő fájlokban.
 
