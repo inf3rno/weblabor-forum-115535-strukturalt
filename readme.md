@@ -15,6 +15,8 @@ El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen 
     A másik, hogy minden alkalommal meg kell nézni, hogy megvan e a példány egy-egy store-ból, amikor elkérjük.
     A harmadik, hogy két dolgot csinál az AuthModel, példányosít, és kezelő a felhasználó azonosítást.
     Tegyük egy absztrakciós szinttel feljebb a Store példányosítást.
+    Máris egy fokkal jobb, most viszont a Controller-be került a példányosítás, ami szintén nem jó.
+    Tegyük még feljebb. Most a Router-ben van. Ott már majdnem jó, de az is két dolgot csinálna, tegyük még feljebb.
 
 &#8730; Némileg zavaró az újrahasznosításnál, hogy ki kell írni, hogy redirect vagy display. Csinálni kellene külön RedirectView-okat.
 

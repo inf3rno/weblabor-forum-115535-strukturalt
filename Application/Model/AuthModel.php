@@ -5,44 +5,42 @@ namespace Model;
 
 class AuthModel
 {
-    static protected $session;
-    static protected $json;
+    protected $session;
+    protected $permanent;
 
-    static public function authorized()
+    public function setSessionStore(Store $session)
     {
-        return static::sessionStore()->load() === true;
+        $this->session = $session;
     }
 
-    static public function login($password)
+    public function setPermanentStore(Store $permanent)
     {
-        if (Crypto::hash($password) === static::jsonStore()->load())
-            static::sessionStore()->save(true);
+        $this->permanent = $permanent;
+    }
+
+    public function authorized()
+    {
+        return $this->session->load() === true;
+    }
+
+    public function login($password)
+    {
+        if (Crypto::hash($password) === $this->permanent->load())
+            $this->session->save(true);
         else
             throw new AuthException();
     }
 
-    static public function update($password)
+    public function update($password)
     {
-        static::jsonStore()->save(Crypto::hash($password));
+        $this->permanent->save(Crypto::hash($password));
     }
 
-    static public function logout()
+    public function logout()
     {
-        static::sessionStore()->save(false);
+        $this->session->save(false);
     }
 
-    static protected function sessionStore()
-    {
-        if (!isset(static::$session))
-            static::$session = new SessionStore();
-        return static::$session;
-    }
 
-    static protected function jsonStore()
-    {
-        if (!isset(static::$json))
-            static::$json = new JsonStore('Application/store.json');
-        return static::$json;
-    }
 }
 

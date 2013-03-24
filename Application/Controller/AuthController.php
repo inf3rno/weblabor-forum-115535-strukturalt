@@ -16,16 +16,23 @@ use View\UpdatedProfileView;
 
 class AuthController
 {
-    static public function index()
+    protected $authModel;
+
+    public function __construct(AuthModel $authModel)
     {
-        static::login();
+        $this->authModel = $authModel;
     }
 
-    static public function login()
+    public function index()
+    {
+        $this->login();
+    }
+
+    public function login()
     {
         try {
-            if (!AuthModel::authorized())
-                AuthModel::login(Input::password());
+            if (!$this->authModel->authorized())
+                $this->authModel->login(Input::password());
             $view = new ProfileRedirect();
         } catch (InputException $e) {
             $view = new AuthView();
@@ -37,23 +44,23 @@ class AuthController
         $view->display();
     }
 
-    static public function logout()
+    public function logout()
     {
         try {
-            if (AuthModel::authorized())
-                AuthModel::logout();
+            if ($this->authModel->authorized())
+                $this->authModel->logout();
         } catch (StoreException $e) {
         }
         $view = new AuthRedirect();
         $view->display();
     }
 
-    static public function profile()
+    public function profile()
     {
         try {
-            if (!AuthModel::authorized())
+            if (!$this->authModel->authorized())
                 throw new AuthException('No permission.');
-            AuthModel::update(Input::password());
+            $this->authModel->update(Input::password());
             $view = new UpdatedProfileView();
         } catch (InputException $e) {
             $view = new ProfileView();

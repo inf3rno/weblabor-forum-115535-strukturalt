@@ -4,7 +4,6 @@ class Router
 {
     static protected $defaultHandler = 'index';
     static protected $urlPattern = '%^/([\w_-]+)\.php$%usD';
-    static protected $controllerClass = 'Controller\AuthController';
 
     static public function dispatch()
     {
@@ -13,10 +12,19 @@ class Router
         else
             $handler = static::$defaultHandler;
 
-        if (!method_exists(static::$controllerClass, $handler))
+        $controller = static::createController();
+        if (!method_exists($controller, $handler))
             $handler = static::$defaultHandler;
-
-        $controller = static::$controllerClass;
-        $controller::$handler();
+        $controller->$handler();
     }
+
+    static protected function createController()
+    {
+        $authModel = new Model\AuthModel();
+        $authModel->setSessionStore(new Model\SessionStore());
+        $authModel->setPermanentStore(new Model\JsonStore('Application/store.json'));
+        $controller = new Controller\AuthController($authModel);
+        return $controller;
+    }
+
 }
