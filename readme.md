@@ -7,7 +7,32 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Keressünk további kódrészleteket, amik ismétlődnek.
+Üzenetküldés a hibák okáról.
+
+&#10005; A jelszó tároló osztály nem cserélhető ki valami könnyen, mert bele van kódolva az AuthModel-be a használata.
+
+    Elég lenne azt beírni a kódba, hogy minden DataStore interface-t teljesítő osztályt használhat.
+    Ezt osztályok nevének átadásával lehetne megoldani, ami nehéz módosíthatósághoz vezetne.
+    Ha példányosítanám ezeket a tároló osztályokat, akkor nem lenne szükség az osztály név átadására.
+
+&#10005; Sok helyen ismétlődik a false-re ellenőrzés. Ez erősen összefügg a hibakezeléssel.
+
+    A kivételek dobásához nem elegek a statikus osztályok.
+    A kivételeket példányosítani kell.
+
+&#10005; Az AuthController-t szét lehetne vágni, hogy kövesse a View mintáját, tehát legyen külön ProfileView és külön AuthView.
+
+    Ez a probléma akkor is nagyon hamar jelentkezne, ha több funkcióval bővítenénk az alkalmazást.
+    Ehhez bele kell nyúlni a Router-be, mert csak egy Controller-t támogat a jelenlegi formájában.
+    A Router módosítása szintén elég nehézkes statikus osztályokkal.
+    A fő gond ott van, hogy szövegesen kell megadni az osztályneveket, ezért azok nehezen módosíthatóak.
+    Ehhez már nem elég statikus osztályok használata. Anonim függvényekkel megoldható, de nem lenne annyira rendezett, mint a mostani változat.
+
+&#10005; A Html form metódus hívásai ilyenek.
+
+    Át lehetne őket tervezni, de ahhoz már nem biztos, hogy elegek a statikus osztályok.
+
+&#8730; Keressünk további kódrészleteket, amik ismétlődnek.
 
 &#8730; A Session-nél is ugyanígy lehetne a DataStore interface-t használni, elvégre ő is adatot ment.
 
