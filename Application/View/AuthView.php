@@ -4,19 +4,19 @@ namespace View;
 
 class AuthView
 {
-    static protected $authUrl = '/';
+    static protected $locationUrl = '/';
     static protected $authTitle = 'Bejelentkezés';
 
     static protected $loginUrl = '/';
     static protected $loginFormHeader = 'Azonosító űrlap';
     static protected $loginFormButton = 'Bejelentkezés';
 
-    static public function toAuth()
+    static public function redirect()
     {
-        Html::redirect(static::$authUrl);
+        Html::redirect(static::$locationUrl);
     }
 
-    static public function authPage()
+    static public function display()
     {
         $params = array(static::$loginUrl, static::$loginFormHeader, static::$loginFormButton);
 

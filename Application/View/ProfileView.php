@@ -4,6 +4,8 @@ namespace View;
 
 class ProfileView
 {
+    static protected $locationUrl = '/profile.php';
+
     static protected $profileTitle = 'Profil oldal';
 
     static protected $logoutUrl = '/logout.php';
@@ -14,14 +16,12 @@ class ProfileView
     static protected $updateFormButton = 'Módosítás';
     static protected $updateSuccessMessage = 'Sikeres jelszó csere.';
 
-    static protected $profileUrl = '/profile.php';
-
-    static public function toProfile()
+    static public function redirect()
     {
-        Html::redirect(static::$profileUrl);
+        Html::redirect(static::$locationUrl);
     }
 
-    static public function profilePage($updated = false)
+    static public function display($updated = false)
     {
         $linkParams = array(static::$logoutUrl, static::$logoutLinkLabel);
         $formParams = array(static::$updateUrl, static::$updateFormHeader, static::$updateFormButton);

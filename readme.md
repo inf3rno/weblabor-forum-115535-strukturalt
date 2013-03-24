@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Az AuthView két dolgot csinál, kirajzolja a bejelentkezős oldalt és a profil oldalt is. Ez ütközik az SRP elvbe, szét kell vágni két osztályra.
+Ki kell emelni az azonos kódot külön osztályba, hogy ne ismétlődjön.
+
+&#8730; Az AuthView két dolgot csinál, kirajzolja a bejelentkezős oldalt és a profil oldalt is. Ez ütközik az SRP elvbe, szét kell vágni két osztályra.
 
     Szétvágtam, viszont vannak nagyon hasonló részek a két View osztályban, érdemes lenne őket azonosan elnevezni.
 

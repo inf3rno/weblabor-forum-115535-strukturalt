@@ -16,24 +16,25 @@ class AuthController
     static public function login()
     {
         if (AuthModel::authorized() || AuthModel::login(Input::password()))
-            ProfileView::toProfile();
+            ProfileView::redirect();
         else
-            AuthView::authPage();
+            AuthView::display();
     }
 
     static public function logout()
     {
         if (AuthModel::authorized())
             AuthModel::logout();
-        AuthView::toAuth();
+        AuthView::redirect();
     }
 
     static public function profile()
     {
-        if (AuthModel::authorized())
-            ProfileView::profilePage(AuthModel::update(Input::password()));
-        else
-            AuthView::toAuth();
+        if (AuthModel::authorized()) {
+            $updated = AuthModel::update(Input::password());
+            ProfileView::display($updated);
+        } else
+            AuthView::redirect();
     }
 }
 
