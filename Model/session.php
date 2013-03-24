@@ -9,24 +9,18 @@ function authorized()
     return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
 }
 
-function login()
+function login($password = false)
 {
-    $password = passwordInput();
-    if ($password === false)
-        return false;
-    if (!validate($password))
-        return false;
-    $_SESSION['authorized'] = true;
-    return true;
+    if ($password !== false && validate($password))
+        $_SESSION['authorized'] = true;
+    return authorized();
 }
 
-function update()
+function update($password = false)
 {
-    $password = passwordInput();
-    if ($password === false)
-        return false;
-    $success = save($password);
-    return $success;
+    if ($password !== false)
+        return store($password);
+    return false;
 }
 
 function logout()

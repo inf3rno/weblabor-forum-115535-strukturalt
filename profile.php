@@ -6,7 +6,7 @@ require_once 'View/document.php';
 require_once 'View/redirect.php';
 
 if (authorized())
-    displayUpdateForm(update());
+    displayUpdateForm(update(passwordInput()));
 else
     redirectToLogin();
 

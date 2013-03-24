@@ -7,7 +7,21 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Tegyük külön fájlokba az egyes rétegeket.
+Csináljunk front controller-t, hogy újra tudjuk hasznosítani a require sorokat a wwwroot-ban lévő fájlokban.
+&#8730; Tegyük külön fájlokba az egyes rétegeket.
+    wwwroot - kérések kezelése
+        Controller
+            input - űrlap adatok beolvasása
+        Model
+            session - állapot tárolása, változtatása a munkamenetben
+                access - hash készítés és tárolás
+                    crypto - hash készítés
+                    hashStore - hash tárolás
+                        store - adatok config fájlba írása
+        View
+            document - konkrét oldalak megjelenítése
+                html - html komponensek
+            redirect - konkrét oldalakra átirányítás
 &#8730; Dolgozzunk még egy kicsit az ismétlődések eltüntetésén.
 &#8730; A kód ismétlődéseket tegyük ki külön fájlokba.
 &#8730; Adjunk hozzá logout lehetőséget.
