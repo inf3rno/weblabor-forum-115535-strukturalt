@@ -7,9 +7,12 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
+Tegyünk prefix-et minden egyes függvényhez, hogy lássuk, melyik függvény melyik réteghez tartozik. Így újra felhasználható lesz egy-egy függvény név.
+
 &#8730; Csináljunk front controller-t, hogy újra tudjuk hasznosítani a require sorokat a wwwroot-ban lévő fájlokban.
 
-    Nem volt szükség a front controllerre az újrahasznosításban, anélkül is ment. Ettől függetlenül megvalósítottam, hogy levédjem a config.json fájlt.
+    Nem volt szükség a front controllerre az újrahasznosításban, anélkül is ment.
+    Ettől függetlenül megvalósítottam, hogy levédjem a config.json fájlt.
 
 &#8730; Tegyük külön fájlokba az egyes rétegeket.
 
