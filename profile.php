@@ -40,6 +40,7 @@ function displayUpdateForm ($updated = false)
     </head>
     <body>
     <h1>Profil oldal</h1>
+    <a href="logout.php">kijelentkezés</a>
     <form action="profile.php" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
         <table>
             <thead>

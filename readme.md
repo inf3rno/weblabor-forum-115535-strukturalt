@@ -7,7 +7,8 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Adjunk hozzá logout lehetőséget.
+A kód ismétlődéseket tegyük ki külön fájlokba.
+&#8730; Adjunk hozzá logout lehetőséget.
 &#8730; Adjuk hozzá az állapot tárolását a munkamenetben.
 &#8730; Csináljuk meg a profil oldalt egyelőre jogosultság ellenőrzés nélkül, és állítsunk be egy jelszót.
 &#8730; Csináljuk meg a feldolgozót, ami ellenőrzi a jelszót.
