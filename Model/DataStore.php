@@ -4,22 +4,22 @@ namespace Model;
 
 class DataStore
 {
+    static protected $file = 'config.json';
+
     static public function save($data)
     {
         $json = json_encode($data);
         if ($json === false)
             return false;
-        $file = 'config.json';
-        $success = file_put_contents($file, $json);
+        $success = file_put_contents(static::$file, $json);
         return $success;
     }
 
     static public function load()
     {
-        $file = 'config.json';
-        if (!file_exists($file))
+        if (!file_exists(static::$file))
             return false;
-        $json = file_get_contents($file);
+        $json = file_get_contents(static::$file);
         if ($json === false)
             return false;
         $data = json_decode($json, true);

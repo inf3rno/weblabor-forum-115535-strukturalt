@@ -4,20 +4,42 @@ namespace View;
 
 class AuthView
 {
-    static public function loginForm()
+    static protected $authTitle = 'Bejelentkezés';
+
+    static protected $loginUrl = '/';
+    static protected $loginFormHeader = 'Azonosító űrlap';
+    static protected $loginFormButton = 'Bejelentkezés';
+
+    static protected $profileTitle = 'Profil oldal';
+
+    static protected $logoutUrl = '/logout.php';
+    static protected $logoutLinkLabel = 'kijelentkezés';
+
+    static protected $updateUrl = '/profile.php';
+    static protected $updateFormHeader = 'Jelszó módosító űrlap';
+    static protected $updateFormButton = 'Módosítás';
+    static protected $updateSuccessMessage = 'Sikeres jelszó csere.';
+
+    static public function authPage()
     {
-        Html::skeleton('Bejelentkezés', function () {
-            Html::form('/index.php', 'Azonosító űrlap', 'Bejelentkezés');
+        $params = array(static::$loginUrl, static::$loginFormHeader, static::$loginFormButton);
+
+        Html::skeleton(static::$authTitle, function () use ($params) {
+            Html::form($params[0], $params[1], $params[2]);
         });
     }
 
-    static public function updateForm($updated = false)
+    static public function profilePage($updated = false)
     {
-        Html::skeleton('Profil oldal', function () use ($updated) {
-            Html::link('/logout.php', 'kijelentkezés');
-            Html::form('/profile.php', 'Jelszó módosító űrlap', 'Módosítás');
+        $linkParams = array(static::$logoutUrl, static::$logoutLinkLabel);
+        $formParams = array(static::$updateUrl, static::$updateFormHeader, static::$updateFormButton);
+        $messageParam = static::$updateSuccessMessage;
+
+        Html::skeleton(static::$profileTitle, function () use ($updated, $linkParams, $formParams, $messageParam) {
+            Html::link($linkParams[0], $linkParams[1]);
+            Html::form($formParams[0], $formParams[1], $formParams[2]);
             if ($updated)
-                Html::message('Sikeres jelszó csere.');
+                Html::message($messageParam);
         });
     }
 

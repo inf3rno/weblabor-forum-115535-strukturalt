@@ -9,6 +9,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 Emeljük ki a konstansokat külön osztályváltozókba.
 
+    Az AuthView-nál látható, hogy elég nehezen boldogulunk a konstansok átadásával. Azért egy kis trükközéssel megoldható.
+    A Redirect kódja rossz helyen van. Ezt többek között abból látni, hogy hasonlóak a konstansok, mint az AuthView-nál.
+
 &#8730; Rendezzük egy kicsit a metódus- és osztályneveket.
 
 &#8730; Tegyük át névterekbe és osztályokba a mostani kódot, és írjunk hozzá autoloader-t. Úgy jobban követhetőek lesznek a függőségi viszonyok.
