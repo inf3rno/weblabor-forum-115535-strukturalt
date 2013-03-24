@@ -1,15 +1,21 @@
 <?php
 
-function redirectToProfile()
-{
-    redirect('/profile.php');
-}
+namespace View;
 
-function redirectToLogin()
+class Redirect
 {
-    redirect('/');
-}
+    static public function toProfile()
+    {
+        static::to('/profile.php');
+    }
 
-function redirect($url){
-    header('location: '.$url);
+    static public function toLogin()
+    {
+        static::to('/');
+    }
+
+    static public function to($url)
+    {
+        header('location: ' . $url);
+    }
 }

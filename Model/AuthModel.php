@@ -4,7 +4,7 @@ namespace Model;
 
 session_start();
 
-class Session
+class AuthModel
 {
     static public function authorized()
     {
@@ -13,7 +13,7 @@ class Session
 
     static public function login($password = false)
     {
-        if ($password !== false && Access::validate($password))
+        if ($password !== false && Crypto::hash($password) === HashStore::load())
             $_SESSION['authorized'] = true;
         return static::authorized();
     }
@@ -21,7 +21,7 @@ class Session
     static public function update($password = false)
     {
         if ($password !== false)
-            return Access::store($password);
+            return HashStore::save(Crypto::hash($password));
         return false;
     }
 

@@ -4,14 +4,14 @@ namespace Model;
 
 class HashStore
 {
-    static public function saveHash($hash)
+    static public function save($hash)
     {
-        return Store::writeConfig(array('hash' => $hash));
+        return DataStore::save(array('hash' => $hash));
     }
 
-    static public function loadHash()
+    static public function load()
     {
-        $config = Store::readConfig();
+        $config = DataStore::load();
         if ($config === false)
             return false;
         return $config['hash'];
