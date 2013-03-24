@@ -14,13 +14,7 @@ class ProfileView extends AbstractView
     static protected $updateFormHeader = 'Jelszó módosító űrlap';
     static protected $updateFormButton = 'Módosítás';
 
-    static public function display()
-    {
-        static::content();
-        parent::display();
-    }
-
-    static protected function content()
+    static protected function build()
     {
         $linkParams = array(static::$logoutUrl, static::$logoutLinkLabel);
         $formParams = array(static::$updateUrl, static::$updateFormHeader, static::$updateFormButton);

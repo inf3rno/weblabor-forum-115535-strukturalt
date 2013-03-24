@@ -2,9 +2,9 @@
 
 namespace View;
 
-class UpdatedProfileView extends ProfileView
+class RejectedAuthView extends AuthView
 {
-    static protected $message = 'Sikeres jelszó csere.';
+    static protected $message = 'Nem sikerült bejelentkezni a jelszóval.';
 
     static protected function build()
     {
@@ -16,6 +16,4 @@ class UpdatedProfileView extends ProfileView
             Html::message($message);
         };
     }
-
 }
-

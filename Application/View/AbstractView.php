@@ -15,7 +15,10 @@ abstract class AbstractView implements View
 
     static public function display()
     {
+        static::build();
         Html::skeleton(static::$title, static::$content);
     }
+
+    abstract static protected function build();
 
 }

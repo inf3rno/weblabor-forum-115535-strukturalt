@@ -6,7 +6,10 @@ use Model\AuthException;
 use Model\AuthModel;
 use Model\StoreException;
 use View\AuthView;
+use View\NoStoreAuthView;
+use View\NoStoreProfileView;
 use View\ProfileView;
+use View\RejectedAuthView;
 use View\UpdatedProfileView;
 
 class AuthController
@@ -23,11 +26,11 @@ class AuthController
                 AuthModel::login(Input::password());
             ProfileView::redirect();
         } catch (InputException $e) {
-            AuthView::display(); //nem küldtek űrlapot, vagy rossz űrlap
+            AuthView::display();
         } catch (StoreException $e) {
-            //nem sikerült az adatok tárolása vagy kiolvasása
+            NoStoreAuthView::display();
         } catch (AuthException $e) {
-            AuthView::display(); //nem egyezik a jelszó a tárolttal
+            RejectedAuthView::display();
         }
     }
 
@@ -36,10 +39,9 @@ class AuthController
         try {
             if (AuthModel::authorized())
                 AuthModel::logout();
-            AuthView::redirect();
         } catch (StoreException $e) {
-            //nem sikerült az adatok tárolása vagy kiolvasása
         }
+        AuthView::redirect();
     }
 
     static public function profile()
@@ -50,11 +52,11 @@ class AuthController
             AuthModel::update(Input::password());
             UpdatedProfileView::display();
         } catch (InputException $e) {
-            ProfileView::display(); //nem küldtek űrlapot, vagy rossz űrlap
+            ProfileView::display();
         } catch (StoreException $e) {
-            //nem sikerült az adatok tárolása vagy kiolvasása
+            NoStoreProfileView::display();
         } catch (AuthException $e) {
-            AuthView::redirect(); //nincs jogosultság
+            AuthView::redirect();
         }
     }
 }

@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Üzenetküldés a hibák okáról.
+Statikus metódus nem lehet absztrakt, emiatt hibát kapok az AbstractView-nál. Át kell írni nem statikusra a View osztályokat.
+
+&#8730; Üzenetküldés a hibák okáról.
 
     Beszórtam try-catch blokkba a controller-ben található kódot, leírtam a commentekben, hogy melyik mikor fut le.
     Jelenleg még úgy tűnik, hogy ismétlődő kód van néhány helyen, de ez azért van, mert nem adtam át a hibaüzeneteket.

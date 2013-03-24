@@ -11,13 +11,12 @@ class AuthView extends AbstractView
     static protected $loginFormHeader = 'Azonosító űrlap';
     static protected $loginFormButton = 'Bejelentkezés';
 
-    static public function display()
+    static protected function build()
     {
         $params = array(static::$loginUrl, static::$loginFormHeader, static::$loginFormButton);
         static::$content = function () use ($params) {
             Html::form($params[0], $params[1], $params[2]);
         };
-        parent::display();
     }
 }
 

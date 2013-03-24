@@ -2,9 +2,9 @@
 
 namespace View;
 
-class UpdatedProfileView extends ProfileView
+class NoStoreProfileView extends ProfileView
 {
-    static protected $message = 'Sikeres jelszó csere.';
+    static protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
 
     static protected function build()
     {
