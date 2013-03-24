@@ -12,9 +12,15 @@ class Page extends AbstractPage
     protected $loginFormHeader = 'Azonosító űrlap';
     protected $loginFormButton = 'Bejelentkezés';
 
+    protected $messages = array(
+        'noStore' => 'Nem sikerült kapcsolatot létesíteni az adattárolóval.',
+        'rejected' => 'Nem sikerült bejelentkezni a jelszóval.'
+    );
+
     public function build()
     {
         $this->html->form($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
+        $this->message();
     }
 }
 

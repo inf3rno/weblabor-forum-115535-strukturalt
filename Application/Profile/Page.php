@@ -15,10 +15,17 @@ class Page extends AbstractPage
     protected $updateFormHeader = 'Jelszó módosító űrlap';
     protected $updateFormButton = 'Módosítás';
 
+    protected $messages = array(
+        'noStore' => 'Nem sikerült kapcsolatot létesíteni az adattárolóval.',
+        'updated' => 'Sikeres jelszó csere.'
+    );
+
+
     public function build()
     {
         $this->html->link($this->logoutUrl, $this->logoutLinkLabel);
         $this->html->form($this->updateUrl, $this->updateFormHeader, $this->updateFormButton);
+        $this->message();
     }
 
 }

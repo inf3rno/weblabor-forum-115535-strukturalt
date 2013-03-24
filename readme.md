@@ -5,9 +5,21 @@ A feladat a példánál az, hogy csináljunk egy beléptető rendszert struktúr
 A beléptető rendszer 3 oldalból fog állni: login, logout, profile.
 A login csak jelszót kér be, amit magának küld el, és összehasonlítja az aktuálissal. Mivel csak egy jelszó lesz, ezért adatbázisra nincs szükség, elég egy json vagy xml fájlban letárolni.
 
+Gyakorlatilag készen van.
+
 **Flow**
 
-A View-oknál a hibaüzeneteket jobb, ha konstruktorral injektálom be, mint hogy emiatt külön osztályok legyenek.
+&#8730; Nincs több olyan kódrészlet, ami újrahasznosítható. Ha bővíteném a funkciókat, akkor keletkeznének ilyenek.
+
+    A jogosultság ellenőrzést ki lehet tenni abstract controller-be.
+    A container-t ha túl nagy lesz szét lehet darabolni kisebb containerekre.
+    A view-nál ha több űrlap lesz, akkor a mostani Html osztály helyett egy általános html építőt lehet csinálni.
+    A router-nél is lehet egy jobb megoldást összehozni, ahol minden egyes action-höz külön útvonalat lehet megadni annotációban.
+    És még nagyon hosszan lehetne sorolni...
+
+&#8730; A View-oknál a hibaüzeneteket jobb, ha konstruktorral injektálom be, mint hogy emiatt külön osztályok legyenek.
+
+    Nem volt okvetlen fontos, inkább csak arra való tekintettel, ha esetleg később egyszerre több hibaüzenetet küldenek valamelyiknél.
 
 &#8730; A Container átadása a View-oknak nagyon sokszor szerepel a kódokban. Ezzel lehetne valamit kezdeni...
 

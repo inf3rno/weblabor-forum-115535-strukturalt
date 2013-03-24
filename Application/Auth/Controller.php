@@ -30,12 +30,14 @@ class Controller
                 $this->authModel->login($this->input->password());
             $view = new Redirect();
         } catch (InputException $e) {
-            $view = new Page();
+            $message = null;
         } catch (StoreException $e) {
-            $view = new NoStorePage();
+            $message = 'noStore';
         } catch (AuthException $e) {
-            $view = new RejectedPage();
+            $message = 'rejected';
         }
+        if (!isset($view))
+            $view = new Page($message);
         $view->display();
     }
 

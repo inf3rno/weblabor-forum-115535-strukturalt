@@ -28,14 +28,16 @@ class Controller
             if (!$this->authModel->authorized())
                 throw new AuthException('No permission.');
             $this->profileModel->update($this->input->password());
-            $view = new UpdatedPage();
+            $message = 'updated';
         } catch (InputException $e) {
-            $view = new Page();
+            $message = null;
         } catch (StoreException $e) {
-            $view = new NoStorePage();
+            $message = 'noStore';
         } catch (AuthException $e) {
             $view = new Redirect();
         }
+        if (!isset($view))
+            $view = new Page($message);
         $view->display();
     }
 }
