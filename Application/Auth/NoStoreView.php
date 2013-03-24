@@ -2,7 +2,7 @@
 
 namespace Application\Auth;
 
-class NoStoreAuthView extends AuthView
+class NoStoreView extends View
 {
     protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
 

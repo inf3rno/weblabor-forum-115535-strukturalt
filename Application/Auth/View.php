@@ -4,7 +4,7 @@ namespace Application\Auth;
 
 use Application\Core\View\AbstractView;
 
-class AuthView extends AbstractView
+class View extends AbstractView
 {
     protected $title = 'Bejelentkezés';
 

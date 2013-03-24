@@ -4,7 +4,7 @@ namespace Application\Profile;
 
 use Application\Core\View\AbstractView;
 
-class ProfileView extends AbstractView
+class View extends AbstractView
 {
     protected $title = 'Profil oldal';
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Auth;
+namespace Application\Profile;
 
-class RejectedAuthView extends AuthView
+class NoStoreView extends View
 {
-    protected $message = 'Nem sikerült bejelentkezni a jelszóval.';
+    protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
 
     protected function build()
     {
@@ -17,4 +17,6 @@ class RejectedAuthView extends AuthView
             $html->message($message);
         };
     }
+
 }
+

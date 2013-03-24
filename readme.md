@@ -7,9 +7,14 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Sok a Profile-al kapcsolatos use bejegyzés az AuthController-ben. Át kell rakni másik Controller-be a profile action-t.
+A view-nál érdemes lenne eltüntetni az anonim függvényt, és egy metódust betenni a helyére callback-nek.
+
+&#8730; Sok a Profile-al kapcsolatos use bejegyzés az AuthController-ben. Át kell rakni másik Controller-be a profile action-t.
 
     Egyelőre még az AuthInput és az AuthModel, amit használ. A profile-hoz tartozó kódot, ki kell emelni ezekből az osztályokból.
+    Az AuthInput-nak nincs semmivel közös kódja, több űrlap kéne, hogy általános részt ki lehessen emelni belőle.
+    A ProfileModel-t megcsináltam. A ProfileController-ben még mindig szerepel az AuthModel a jogosultság ellenőrzés miatt.
+    A jogosultság ellenőrzést egy szinttel feljebb lehetne tenni, ha lenne még olyan controller vagy action, ami használja.
 
 &#8730; Van egy csomó Auth kezdetű osztályunk, azokat érdemes lenne összevonni egyetlen névtérbe.
 

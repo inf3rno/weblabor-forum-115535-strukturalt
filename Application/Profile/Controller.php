@@ -3,23 +3,25 @@
 namespace Application\Profile;
 
 use Application\Auth\AuthException;
-use Application\Auth\AuthInput;
-use Application\Auth\AuthRedirect;
+use Application\Auth\Input;
+use Application\Auth\Redirect;
 use Application\Container;
 use Application\Core\Controller\InputException;
 use Application\Core\Model\Store\StoreException;
 
-class ProfileController
+class Controller
 {
     protected $authModel;
+    protected $profileModel;
     protected $input;
     protected $container;
 
     public function __construct(Container $container)
     {
         $this->authModel = $container->authModel();
+        $this->profileModel = $container->profileModel();
         $this->container = $container;
-        $this->input = new AuthInput();
+        $this->input = new Input();
     }
 
     public function profile()
@@ -27,14 +29,14 @@ class ProfileController
         try {
             if (!$this->authModel->authorized())
                 throw new AuthException('No permission.');
-            $this->authModel->update($this->input->password());
-            $view = new UpdatedProfileView($this->container);
+            $this->profileModel->update($this->input->password());
+            $view = new UpdatedView($this->container);
         } catch (InputException $e) {
-            $view = new ProfileView($this->container);
+            $view = new View($this->container);
         } catch (StoreException $e) {
-            $view = new NoStoreProfileView($this->container);
+            $view = new NoStoreView($this->container);
         } catch (AuthException $e) {
-            $view = new AuthRedirect($this->container);
+            $view = new Redirect($this->container);
         }
         $view->display();
     }

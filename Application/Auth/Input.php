@@ -4,7 +4,7 @@ namespace Application\Auth;
 
 use Application\Core\Controller\InputException;
 
-class AuthInput
+class Input
 {
     protected $passwordField = 'password';
 

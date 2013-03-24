@@ -5,9 +5,9 @@ namespace Application\Auth;
 use Application\Container;
 use Application\Core\Controller\InputException;
 use Application\Core\Model\Store\StoreException;
-use Application\Profile\ProfileRedirect;
+use Application\Profile\Redirect;
 
-class AuthController
+class Controller
 {
     protected $authModel;
     protected $input;
@@ -17,7 +17,7 @@ class AuthController
     {
         $this->authModel = $container->authModel();
         $this->container = $container;
-        $this->input = new AuthInput();
+        $this->input = new Input();
     }
 
     public function index()
@@ -30,13 +30,13 @@ class AuthController
         try {
             if (!$this->authModel->authorized())
                 $this->authModel->login($this->input->password());
-            $view = new ProfileRedirect($this->container);
+            $view = new Redirect($this->container);
         } catch (InputException $e) {
-            $view = new AuthView($this->container);
+            $view = new View($this->container);
         } catch (StoreException $e) {
-            $view = new NoStoreAuthView($this->container);
+            $view = new NoStoreView($this->container);
         } catch (AuthException $e) {
-            $view = new RejectedAuthView($this->container);
+            $view = new RejectedView($this->container);
         }
         $view->display();
     }
@@ -48,7 +48,7 @@ class AuthController
                 $this->authModel->logout();
         } catch (StoreException $e) {
         }
-        $view = new AuthRedirect($this->container);
+        $view = new Redirect($this->container);
         $view->display();
     }
 

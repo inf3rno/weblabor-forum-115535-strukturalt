@@ -4,7 +4,7 @@ namespace Application\Auth;
 
 use Application\Container;
 
-class AuthModel
+class Model
 {
     /** @var \Application\Core\Model\Store\Store */
     protected $session;
@@ -31,11 +31,6 @@ class AuthModel
             $this->session->save(true);
         else
             throw new AuthException();
-    }
-
-    public function update($password)
-    {
-        $this->permanent->save($this->encryptor->hash($password));
     }
 
     public function logout()

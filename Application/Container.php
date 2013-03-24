@@ -10,6 +10,7 @@ class Container
     protected $authController;
     protected $profileController;
     protected $authModel;
+    protected $profileModel;
     protected $sessionStore;
     protected $permanentStore;
     protected $encryptor;
@@ -32,22 +33,29 @@ class Container
     public function authController()
     {
         if (!isset($this->authController))
-            $this->authController = new Auth\AuthController($this);
+            $this->authController = new Auth\Controller($this);
         return $this->authController;
     }
 
     public function profileController()
     {
         if (!isset($this->profileController))
-            $this->profileController = new Profile\ProfileController($this);
+            $this->profileController = new Profile\Controller($this);
         return $this->profileController;
     }
 
     public function authModel()
     {
         if (!isset($this->authModel))
-            $this->authModel = new Auth\AuthModel($this);
+            $this->authModel = new Auth\Model($this);
         return $this->authModel;
+    }
+
+    public function profileModel()
+    {
+        if (!isset($this->profileModel))
+            $this->profileModel = new Profile\Model($this);
+        return $this->profileModel;
     }
 
     public function sessionStore()

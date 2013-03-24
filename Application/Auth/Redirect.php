@@ -4,7 +4,7 @@ namespace Application\Auth;
 
 use Application\Core\View\AbstractRedirect;
 
-class AuthRedirect extends AbstractRedirect
+class Redirect extends AbstractRedirect
 {
     protected $url = '/';
 }
