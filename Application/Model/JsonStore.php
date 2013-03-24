@@ -2,31 +2,31 @@
 
 namespace Model;
 
-class JsonStore implements DataStore
+class JsonStore implements Store
 {
-    static protected $file;
+    protected $file;
 
-    static public function configure($file)
+    public function __construct($file)
     {
-        static::$file = $file;
+        $this->file = $file;
     }
 
-    static public function save($data)
+    public function save($data)
     {
         $json = json_encode($data);
         if ($json === false)
             throw new StoreException('Cannot encode json data.');
-        if (!file_put_contents(static::$file, $json))
-            throw new StoreException('Cannot write file: ' . static::$file);
+        if (!file_put_contents($this->file, $json))
+            throw new StoreException('Cannot write file: ' . $this->file);
     }
 
-    static public function load()
+    public function load()
     {
-        if (!file_exists(static::$file))
+        if (!file_exists($this->file))
             return;
-        $json = file_get_contents(static::$file);
+        $json = file_get_contents($this->file);
         if ($json === false)
-            throw new StoreException('Cannot read file: ' . static::$file);
+            throw new StoreException('Cannot read file: ' . $this->file);
         $data = json_decode($json, true);
         if ($data === null)
             throw new StoreException('Cannot decode json data.');

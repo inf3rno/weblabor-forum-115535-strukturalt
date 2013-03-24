@@ -2,31 +2,25 @@
 
 namespace Model;
 
-class SessionStore implements DataStore
+class SessionStore implements Store
 {
-    static protected $started = false;
-    static protected $dataKey = 'data';
+    protected $dataKey = 'data';
 
-    static public function save($data)
+    public function __construct()
     {
-        static::startIfNecessary();
-        $_SESSION[static::$dataKey] = $data;
+        if (!session_start())
+            throw new StoreException('Cannot start session.');
     }
 
-    static public function load()
+    public function save($data)
     {
-        static::startIfNecessary();
-        if (!isset($_SESSION[static::$dataKey]))
+        $_SESSION[$this->dataKey] = $data;
+    }
+
+    public function load()
+    {
+        if (!isset($_SESSION[$this->dataKey]))
             return;
-        return $_SESSION[static::$dataKey];
-    }
-
-    static protected function startIfNecessary()
-    {
-        if (!static::$started) {
-            if (!session_start())
-                throw new StoreException('Cannot start session.');
-            static::$started = true;
-        }
+        return $_SESSION[$this->dataKey];
     }
 }

@@ -9,6 +9,13 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen másik Store interface-t implementáló megoldásra.
 
+    Egyelőre betettem az AuthModel-be a Store példányosítást. Kénytelen voltam a bootstrapből kiszedni a json fájl helyét.
+    A példányosítás nem az AuthModel feladata, ez több dologból is elég tisztán látszik.
+    Az egyik ilyen, hogy több absztrakciós szint van jelen az osztályban, ezt a protected jelzi.
+    A másik, hogy minden alkalommal meg kell nézni, hogy megvan e a példány egy-egy store-ból, amikor elkérjük.
+    A harmadik, hogy két dolgot csinál az AuthModel, példányosít, és kezelő a felhasználó azonosítást.
+    Tegyük egy absztrakciós szinttel feljebb a Store példányosítást.
+
 &#8730; Némileg zavaró az újrahasznosításnál, hogy ki kell írni, hogy redirect vagy display. Csinálni kellene külön RedirectView-okat.
 
 &#8730; Statikus metódus nem lehet absztrakt, emiatt hibát kapok az AbstractView-nál. Át kell írni nem statikusra a View osztályokat.
