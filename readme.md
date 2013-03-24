@@ -9,6 +9,8 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 Az AuthView két dolgot csinál, kirajzolja a bejelentkezős oldalt és a profil oldalt is. Ez ütközik az SRP elvbe, szét kell vágni két osztályra.
 
+    Szétvágtam, viszont vannak nagyon hasonló részek a két View osztályban, érdemes lenne őket azonosan elnevezni.
+
 &#8730; A DataStore-nál át kell írni a mentés helyét, mert nem kapja meg, hogy az alkalmazás éppen milyen mappában van. Ezt kéne valahogyan megoldani.
 
 &#8730; Csináljunk külön osztályt az autoloader-hez is, tegyük az Application mappába az alkalmazásunkat, hogy a Router ne az index.php-val legyen egy szinten.
