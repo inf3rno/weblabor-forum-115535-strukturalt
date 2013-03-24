@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Csináljunk külön osztályt az autoloader-hez is, tegyük az Application mappába az alkalmazásunkat, hogy a Router ne az index.php-val legyen egy szinten.
+A DataStore-nál át kell írni a mentés helyét, mert nem kapja meg, hogy az alkalmazás éppen milyen mappában van. Ezt kéne valahogyan megoldani.
+
+&#8730; Csináljunk külön osztályt az autoloader-hez is, tegyük az Application mappába az alkalmazásunkat, hogy a Router ne az index.php-val legyen egy szinten.
 
 &#8730; Emeljük ki a konstansokat külön osztályváltozókba.
 
@@ -36,7 +38,7 @@ Csináljunk külön osztályt az autoloader-hez is, tegyük az Application mapp�
 &#8730; Csináljunk front controller-t, hogy újra tudjuk hasznosítani a require sorokat a wwwroot-ban lévő fájlokban.
 
     Nem volt szükség a front controllerre az újrahasznosításban, anélkül is ment.
-    Ettől függetlenül megvalósítottam, hogy levédjem a config.json fájlt.
+    Ettől függetlenül megvalósítottam, hogy levédjem a store.json fájlt.
 
 &#8730; Tegyük külön fájlokba az egyes rétegeket.
 

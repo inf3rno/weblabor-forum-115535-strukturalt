@@ -4,7 +4,7 @@ namespace Model;
 
 class DataStore
 {
-    static protected $file = 'config.json';
+    static protected $file = 'Application/store.json';
 
     static public function save($data)
     {
