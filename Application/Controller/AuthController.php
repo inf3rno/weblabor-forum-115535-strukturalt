@@ -5,6 +5,7 @@ namespace Controller;
 use Model\AuthModel;
 use View\AuthView;
 use View\ProfileView;
+use View\UpdatedProfileView;
 
 class AuthController
 {
@@ -16,9 +17,8 @@ class AuthController
     static public function login()
     {
         if (AuthModel::authorized() || AuthModel::login(Input::password()))
-            ProfileView::redirect();
-        else
-            AuthView::display();
+            return ProfileView::redirect();
+        AuthView::display();
     }
 
     static public function logout()
@@ -30,13 +30,12 @@ class AuthController
 
     static public function profile()
     {
-        if (AuthModel::authorized()) {
-            if (AuthModel::update(Input::password()))
-                ProfileView::displayUpdated();
-            else
-                ProfileView::display();
-        } else
-            AuthView::redirect();
+        if (!AuthModel::authorized())
+            return AuthView::redirect();
+        if (AuthModel::update(Input::password()))
+            UpdatedProfileView::display();
+        else
+            ProfileView::display();
     }
 }
 

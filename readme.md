@@ -7,11 +7,16 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Nem tiszta az AbstractView szerkezete, a display metódus paraméter listája eltérő a ProfileView esetében.
+Meg kell nézni, hogy a DataStore és a HashStore felcserélhető e, lehet, hogy nincs is szükség külön tömbben tárolásra json-ban.
+
+    Ez mondjuk saját tudatlanságból alakult így. Ezzel kapcsolatban érdemes egy Store interface-t definiálni.
+
+&#8730; Nem tiszta az AbstractView szerkezete, a display metódus paraméter listája eltérő a ProfileView esetében.
 
     Kiemeltem külön metódusba. Betettem egy interface-t, ami leírja, hogy hogyan kell kinézni egy View-nak.
     Az interface-ek megvédenek attól, hogy véletlen felülírjad az eredeti paraméterlistákat örököltetésnél.
     A ProfileView osztály több dolgot csinál, mint kellene neki, ezt az is jelzi, hogy displayUpdated kint van a View interface-ből.
+    Továbbörököltettem a ProfileView-ot, most már minden publikus metódusa bent van a View interface-ben, szóval úgy néz ki, mint bármelyik View.
 
 &#8730; Ki kell emelni az azonos kódot külön osztályba, hogy ne ismétlődjön.
 
