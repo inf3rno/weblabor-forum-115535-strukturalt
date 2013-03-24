@@ -2,23 +2,84 @@
 
 //logika
 
+//munkamenet kezelés, azonosítás
+
 session_start();
 
 function authorized(){
     return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
 }
 
-function login($data)
+function login()
 {
-    if (empty($data))
+    $password = passwordInput();
+    if ($password === false)
         return false;
-    if (!isset($data['password']))
+    if (!validate($password))
         return false;
-    if (!is_string($data['password']))
-        return false;
-    $password = $data['password'];
-    $hash = createHash($password);
+    $_SESSION['authorized'] = true;
+    return true;
+}
 
+function update(){
+    $password = passwordInput();
+    if ($password === false)
+        return false;
+    $success = save($password);
+    return $success;
+}
+
+function logout(){
+    $_SESSION['authorized'] = false;
+}
+
+//űrlap adatok beolvasása
+
+function passwordInput(){
+    if (!isset($_POST['password']))
+        return false;
+    if (!is_string($_POST['password']))
+        return false;
+    return $_POST['password'];
+}
+
+//jelszó mentés és összehasonlítás
+
+function save($password){
+    $config = array('hash' => createHash($password));
+    return writeConfig($config);
+}
+
+function validate($password){
+    $hash = createHash($password);
+    $config = readConfig();
+    if ($config === false)
+        return false;
+    if ($hash !== $config['hash'])
+        return false;
+    return true;
+}
+
+//hash készítés a jelszóból
+
+function createHash($password)
+{
+    $salt = 'titkos';
+    return sha1(sha1($salt) . $password);
+}
+
+//jelszó tároló fájl mentése és beolvasása
+
+function writeConfig($config){
+    $configJson = json_encode($config);
+    if ($configJson === false)
+        return false;
+    $configFile = 'config.json';
+    $success = file_put_contents($configFile, $configJson);
+    return $success;
+}
+
+function readConfig(){
     $configFile = 'config.json';
     if (!file_exists($configFile))
         return false;
@@ -28,44 +89,12 @@ function login($data)
     $config = json_decode($configJson, true);
     if ($config === null)
         return false;
-    $validHash = $config['hash'];
-
-    if ($hash !== $validHash)
-        return false;
-    $_SESSION['authorized'] = true;
-    return true;
-}
-
-function update($data){
-    if (empty($data))
-        return false;
-    if (!isset($data['password']))
-        return false;
-    if (!is_string($data['password']))
-        return false;
-    $password = $data['password'];
-    $hash = createHash($password);
-
-    $config = array('hash' => $hash);
-    $configJson = json_encode($config);
-    if ($configJson === false)
-        return false;
-    $configFile = 'config.json';
-    $success = file_put_contents($configFile, $configJson);
-    return $success;
-}
-
-function logout(){
-    $_SESSION['authorized'] = false;
-}
-
-function createHash($password)
-{
-    $salt = 'titkos';
-    return sha1(sha1($salt) . $password);
+    return $config;
 }
 
 //megjelenítés
+
+//átirányítás
 
 function redirectToProfile()
 {
@@ -76,6 +105,8 @@ function redirectToLogin()
 {
     header('location: /');
 }
+
+//űrlapok
 
 function displayLoginForm ()
 {

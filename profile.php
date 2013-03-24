@@ -3,7 +3,7 @@
 require 'tools.php';
 
 if (authorized())
-    displayUpdateForm(update($_POST));
+    displayUpdateForm(update());
 else
     redirectToLogin();
 

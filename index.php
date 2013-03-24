@@ -2,7 +2,7 @@
 
 require 'tools.php';
 
-if (authorized() || login($_POST))
+if (authorized() || login())
     redirectToProfile();
 else
     displayLoginForm();
