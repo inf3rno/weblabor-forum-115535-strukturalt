@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Application\Controller\Input;
 
 class InputException extends \Exception
 {

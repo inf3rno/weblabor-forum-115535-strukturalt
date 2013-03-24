@@ -1,13 +1,15 @@
 <?php
 
-namespace View;
+namespace Application\View;
+
+use Application\Container;
 
 abstract class AbstractRedirect implements View
 {
     protected $html;
     protected $url;
 
-    public function __construct(\Container $container)
+    public function __construct(Container $container)
     {
         $this->html = $container->html();
     }

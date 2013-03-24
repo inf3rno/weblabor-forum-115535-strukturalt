@@ -1,6 +1,8 @@
 <?php
 
-namespace View;
+namespace Application\View;
+
+use Application\Container;
 
 abstract class AbstractView implements View
 {
@@ -8,7 +10,7 @@ abstract class AbstractView implements View
     protected $title;
     protected $content;
 
-    public function __construct(\Container $container)
+    public function __construct(Container $container)
     {
         $this->html = $container->html();
     }

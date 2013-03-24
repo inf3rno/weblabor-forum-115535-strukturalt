@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Application\Model;
 
 class AuthException extends \Exception
 {

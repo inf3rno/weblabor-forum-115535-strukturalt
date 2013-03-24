@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Rendezzük egy kicsit a névtereket, hogy jobban látszódjon mi melyik réteghez tartozik.
+Van egy csomó Auth kezdetű osztályunk, azokat érdemes lenne összevonni egyetlen névtérbe.
+
+&#8730; Rendezzük egy kicsit a névtereket, hogy jobban látszódjon mi melyik réteghez tartozik.
 
 &#8730; Csináljunk sima osztályt az összes statikusból. Aminél olyanok a konstansok, azokat tegyük be a Container-be.
 

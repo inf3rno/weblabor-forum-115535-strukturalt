@@ -1,6 +1,8 @@
 <?php
 
-namespace View;
+namespace Application\View\Auth;
+
+use Application\View\AbstractView;
 
 class AuthView extends AbstractView
 {

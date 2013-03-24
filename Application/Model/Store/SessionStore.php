@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Application\Model\Store;
 
 class SessionStore implements Store
 {

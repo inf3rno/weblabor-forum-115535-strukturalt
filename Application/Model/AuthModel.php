@@ -1,18 +1,19 @@
 <?php
 
-namespace Model;
+namespace Application\Model;
 
+use Application\Container;
 
 class AuthModel
 {
-    /** @var Store */
+    /** @var Store\Store */
     protected $session;
-    /** @var Store */
+    /** @var Store\Store */
     protected $permanent;
-    /** @var Encryptor */
+    /** @var Encryptor\Encryptor */
     protected $encryptor;
 
-    public function __construct(\Container $container)
+    public function __construct(Container $container)
     {
         $this->session = $container->sessionStore();
         $this->permanent = $container->permanentStore();

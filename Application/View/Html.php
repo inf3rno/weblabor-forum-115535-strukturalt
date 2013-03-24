@@ -1,6 +1,6 @@
 <?php
 
-namespace View;
+namespace Application\View;
 
 class Html {
     public function redirect($url)

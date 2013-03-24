@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Application\Controller\Input;
 
-class Input
+class AuthInput
 {
     protected $passwordField = 'password';
 

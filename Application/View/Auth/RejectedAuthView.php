@@ -1,10 +1,10 @@
 <?php
 
-namespace View;
+namespace Application\View\Auth;
 
-class UpdatedProfileView extends ProfileView
+class RejectedAuthView extends AuthView
 {
-    protected $message = 'Sikeres jelszó csere.';
+    protected $message = 'Nem sikerült bejelentkezni a jelszóval.';
 
     protected function build()
     {
@@ -17,6 +17,4 @@ class UpdatedProfileView extends ProfileView
             $html->message($message);
         };
     }
-
 }
-

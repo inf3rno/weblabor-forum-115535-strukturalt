@@ -1,6 +1,8 @@
 <?php
 
-namespace View;
+namespace Application\View\Profile;
+
+use Application\View\AbstractRedirect;
 
 class ProfileRedirect extends AbstractRedirect
 {

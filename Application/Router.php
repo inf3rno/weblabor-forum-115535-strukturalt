@@ -1,5 +1,7 @@
 <?php
 
+namespace Application;
+
 class Router
 {
     protected $defaultAction = 'index';

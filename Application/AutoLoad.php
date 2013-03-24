@@ -1,5 +1,7 @@
 <?php
 
+namespace Application;
+
 class AutoLoad
 {
     protected $extension = '.php';

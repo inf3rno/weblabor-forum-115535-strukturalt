@@ -1,6 +1,6 @@
 <?php
 
-namespace View;
+namespace Application\View\Profile;
 
 class NoStoreProfileView extends ProfileView
 {

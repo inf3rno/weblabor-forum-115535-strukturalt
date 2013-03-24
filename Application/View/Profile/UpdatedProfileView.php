@@ -1,10 +1,10 @@
 <?php
 
-namespace View;
+namespace Application\View\Profile;
 
-class NoStoreAuthView extends AuthView
+class UpdatedProfileView extends ProfileView
 {
-    protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
+    protected $message = 'Sikeres jelszó csere.';
 
     protected function build()
     {
@@ -17,4 +17,6 @@ class NoStoreAuthView extends AuthView
             $html->message($message);
         };
     }
+
 }
+

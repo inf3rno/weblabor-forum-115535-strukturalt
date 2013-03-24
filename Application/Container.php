@@ -1,5 +1,7 @@
 <?php
 
+namespace Application;
+
 class Container
 {
 
@@ -43,21 +45,21 @@ class Container
     public function sessionStore()
     {
         if (!isset($this->sessionStore))
-            $this->sessionStore = new Model\SessionStore();
+            $this->sessionStore = new Model\Store\SessionStore();
         return $this->sessionStore;
     }
 
     public function permanentStore()
     {
         if (!isset($this->permanentStore))
-            $this->permanentStore = new Model\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
+            $this->permanentStore = new Model\Store\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
         return $this->permanentStore;
     }
 
     public function encryptor()
     {
         if (!isset($this->encryptor))
-            $this->encryptor = new Model\Sha1Encryptor($this->salt);
+            $this->encryptor = new Model\Encryptor\Sha1Encryptor($this->salt);
         return $this->encryptor;
     }
 
