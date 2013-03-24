@@ -15,7 +15,7 @@ class AuthModel
 
     static public function login($password = false)
     {
-        if ($password !== false && Crypto::hash($password) === HashStore::load())
+        if ($password !== false && Crypto::hash($password) === JsonStore::load())
             $_SESSION[static::$stateKey] = true;
         return static::authorized();
     }
@@ -23,7 +23,7 @@ class AuthModel
     static public function update($password = false)
     {
         if ($password !== false)
-            return HashStore::save(Crypto::hash($password));
+            return JsonStore::save(Crypto::hash($password));
         return false;
     }
 

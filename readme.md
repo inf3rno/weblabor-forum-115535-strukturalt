@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Meg kell nézni, hogy a DataStore és a HashStore felcserélhető e, lehet, hogy nincs is szükség külön tömbben tárolásra json-ban.
+A Session-nél is ugyanígy lehetne a DataStore interface-t használni, elvégre ő is adatot ment.
+
+&#8730; Meg kell nézni, hogy a DataStore és a HashStore felcserélhető e, lehet, hogy nincs is szükség külön tömbben tárolásra json-ban.
 
     Ez mondjuk saját tudatlanságból alakult így. Ezzel kapcsolatban érdemes egy Store interface-t definiálni.
 
