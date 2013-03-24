@@ -2,7 +2,7 @@
 
 namespace View;
 
-abstract class AbstractView
+abstract class AbstractView implements View
 {
     static protected $url;
     static protected $title;

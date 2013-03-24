@@ -15,11 +15,20 @@ class ProfileView extends AbstractView
     static protected $updateFormButton = 'Módosítás';
     static protected $updateSuccessMessage = 'Sikeres jelszó csere.';
 
-    static public function display($updated = false)
+    static protected $updated = false;
+
+    static public function displayUpdated()
+    {
+        static::$updated = true;
+        static::display();
+    }
+
+    static public function display()
     {
         $linkParams = array(static::$logoutUrl, static::$logoutLinkLabel);
         $formParams = array(static::$updateUrl, static::$updateFormHeader, static::$updateFormButton);
         $messageParam = static::$updateSuccessMessage;
+        $updated = static::$updated;
 
         static::$content = function () use ($updated, $linkParams, $formParams, $messageParam) {
             Html::link($linkParams[0], $linkParams[1]);

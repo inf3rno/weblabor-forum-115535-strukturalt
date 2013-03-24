@@ -31,8 +31,10 @@ class AuthController
     static public function profile()
     {
         if (AuthModel::authorized()) {
-            $updated = AuthModel::update(Input::password());
-            ProfileView::display($updated);
+            if (AuthModel::update(Input::password()))
+                ProfileView::displayUpdated();
+            else
+                ProfileView::display();
         } else
             AuthView::redirect();
     }

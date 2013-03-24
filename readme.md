@@ -9,6 +9,10 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 Nem tiszta az AbstractView szerkezete, a display metódus paraméter listája eltérő a ProfileView esetében.
 
+    Kiemeltem külön metódusba. Betettem egy interface-t, ami leírja, hogy hogyan kell kinézni egy View-nak.
+    Az interface-ek megvédenek attól, hogy véletlen felülírjad az eredeti paraméterlistákat örököltetésnél.
+    A ProfileView osztály több dolgot csinál, mint kellene neki, ezt az is jelzi, hogy displayUpdated kint van a View interface-ből.
+
 &#8730; Ki kell emelni az azonos kódot külön osztályba, hogy ne ismétlődjön.
 
     A probléma itt az, hogy a külön osztálynak át kell adni a paramétereket. Így viszont értelmetlen létrehozni, mert nem változik semmit az azonos kód.
