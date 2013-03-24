@@ -24,49 +24,49 @@ class Container
     public function router()
     {
         if (!isset($this->router))
-            $this->router = new Router($this);
+            $this->router = new Core\Router($this);
         return $this->router;
     }
 
     public function controller()
     {
         if (!isset($this->controller))
-            $this->controller = new Controller\AuthController($this);
+            $this->controller = new Auth\AuthController($this);
         return $this->controller;
     }
 
     public function authModel()
     {
         if (!isset($this->authModel))
-            $this->authModel = new Model\AuthModel($this);
+            $this->authModel = new Auth\AuthModel($this);
         return $this->authModel;
     }
 
     public function sessionStore()
     {
         if (!isset($this->sessionStore))
-            $this->sessionStore = new Model\Store\SessionStore();
+            $this->sessionStore = new Core\Model\Store\SessionStore();
         return $this->sessionStore;
     }
 
     public function permanentStore()
     {
         if (!isset($this->permanentStore))
-            $this->permanentStore = new Model\Store\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
+            $this->permanentStore = new Core\Model\Store\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
         return $this->permanentStore;
     }
 
     public function encryptor()
     {
         if (!isset($this->encryptor))
-            $this->encryptor = new Model\Encryptor\Sha1Encryptor($this->salt);
+            $this->encryptor = new Core\Model\Encryptor\Sha1Encryptor($this->salt);
         return $this->encryptor;
     }
 
     public function html()
     {
         if (!$this->html)
-            $this->html = new View\Html();
+            $this->html = new Core\View\Html();
         return $this->html;
     }
 

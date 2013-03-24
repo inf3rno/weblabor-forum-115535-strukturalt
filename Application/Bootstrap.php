@@ -7,9 +7,9 @@ class Bootstrap
 
     public function __construct()
     {
-        require_once(__DIR__ . DIRECTORY_SEPARATOR . 'AutoLoad.php');
+        require_once(__DIR__ . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR . 'AutoLoad.php');
 
-        $autoLoad = new AutoLoad();
+        $autoLoad = new Core\AutoLoad();
         $autoLoad->register(__DIR__ . DIRECTORY_SEPARATOR . '..');
 
         $container = new Container(__DIR__);

@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Van egy csomó Auth kezdetű osztályunk, azokat érdemes lenne összevonni egyetlen névtérbe.
+Sok a Profile-al kapcsolatos use bejegyzés az AuthController-ben. Át kell rakni másik Controller-be a profile action-t.
+
+&#8730; Van egy csomó Auth kezdetű osztályunk, azokat érdemes lenne összevonni egyetlen névtérbe.
 
 &#8730; Rendezzük egy kicsit a névtereket, hogy jobban látszódjon mi melyik réteghez tartozik.
 
