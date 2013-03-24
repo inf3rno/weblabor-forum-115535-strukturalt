@@ -7,6 +7,7 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Csináljuk meg a profil oldalt egyelőre jogosultság ellenőrzés nélkül, és állítsunk be egy jelszót.
+Adjuk hozzá az állapot tárolását a munkamenetben.
+&#8730; Csináljuk meg a profil oldalt egyelőre jogosultság ellenőrzés nélkül, és állítsunk be egy jelszót.
 &#8730; Csináljuk meg a feldolgozót, ami ellenőrzi a jelszót.
 &#8730; Először szórjuk össze a login űrlapot.
