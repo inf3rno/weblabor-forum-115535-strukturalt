@@ -1,7 +1,15 @@
 <?php
 
-$updated = update($_POST);
-displayUpdateForm($updated);
+session_start();
+
+if (authorized())
+    displayUpdateForm(update($_POST));
+else
+    redirectToLogin();
+
+function authorized(){
+    return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
+}
 
 function update($data){
     if (empty($data))
@@ -57,6 +65,11 @@ function displayUpdateForm ($updated = false)
     <?php } ?>
     </body>
     </html><?php
+}
+
+function redirectToLogin()
+{
+    header('location: index.php');
 }
 
 function createHash($password)

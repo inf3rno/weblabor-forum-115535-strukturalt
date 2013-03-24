@@ -1,9 +1,15 @@
 <?php
 
-if (login($_POST))
+session_start();
+
+if (authorized() || login($_POST))
     redirectToProfile();
 else
     displayLoginForm();
+
+function authorized(){
+    return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
+}
 
 function login($data)
 {
@@ -27,7 +33,10 @@ function login($data)
         return false;
     $validHash = $config['hash'];
 
-    return $hash === $validHash;
+    if ($hash !== $validHash)
+        return false;
+    $_SESSION['authorized'] = true;
+    return true;
 }
 
 function redirectToProfile()
