@@ -8,11 +8,12 @@ class Router
 {
     protected $defaultAction = 'index';
     protected $urlPattern = '%^/([\w_-]+)\.php$%usD';
-    protected $controller;
+    protected $controllers = array();
 
     public function __construct(Container $container)
     {
-        $this->controller = $container->controller();
+        $this->controllers[] = $container->authController();
+        $this->controllers[] = $container->profileController();
     }
 
     public function dispatch($url)
@@ -20,8 +21,18 @@ class Router
         $action = $this->defaultAction;
         if (preg_match($this->urlPattern, $url, $matches))
             $action = $matches[1];
-        if (!method_exists($this->controller, $action))
+        $found = false;
+        foreach ($this->controllers as $controller) {
+            if (method_exists($controller, $action)) {
+                $found = true;
+                $controller->$action();
+                break;
+            }
+        }
+        if (!$found) {
+            $controller = $this->controllers[0];
             $action = $this->defaultAction;
-        $this->controller->$action();
+            $controller->$action();
+        }
     }
 }

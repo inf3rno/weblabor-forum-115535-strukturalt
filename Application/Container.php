@@ -7,7 +7,8 @@ class Container
 
     protected $directory;
     protected $router;
-    protected $controller;
+    protected $authController;
+    protected $profileController;
     protected $authModel;
     protected $sessionStore;
     protected $permanentStore;
@@ -28,11 +29,18 @@ class Container
         return $this->router;
     }
 
-    public function controller()
+    public function authController()
     {
-        if (!isset($this->controller))
-            $this->controller = new Auth\AuthController($this);
-        return $this->controller;
+        if (!isset($this->authController))
+            $this->authController = new Auth\AuthController($this);
+        return $this->authController;
+    }
+
+    public function profileController()
+    {
+        if (!isset($this->profileController))
+            $this->profileController = new Profile\ProfileController($this);
+        return $this->profileController;
     }
 
     public function authModel()

@@ -5,10 +5,7 @@ namespace Application\Auth;
 use Application\Container;
 use Application\Core\Controller\InputException;
 use Application\Core\Model\Store\StoreException;
-use Application\Profile\NoStoreProfileView;
 use Application\Profile\ProfileRedirect;
-use Application\Profile\ProfileView;
-use Application\Profile\UpdatedProfileView;
 
 class AuthController
 {
@@ -55,21 +52,5 @@ class AuthController
         $view->display();
     }
 
-    public function profile()
-    {
-        try {
-            if (!$this->authModel->authorized())
-                throw new AuthException('No permission.');
-            $this->authModel->update($this->input->password());
-            $view = new UpdatedProfileView($this->container);
-        } catch (InputException $e) {
-            $view = new ProfileView($this->container);
-        } catch (StoreException $e) {
-            $view = new NoStoreProfileView($this->container);
-        } catch (AuthException $e) {
-            $view = new AuthRedirect($this->container);
-        }
-        $view->display();
-    }
 }
 
