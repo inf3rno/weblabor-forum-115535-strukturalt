@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\AuthException;
-use Model\AuthModel;
 use Model\StoreException;
 use View\AuthRedirect;
 use View\AuthView;
@@ -18,9 +17,9 @@ class AuthController
 {
     protected $authModel;
 
-    public function __construct(AuthModel $authModel)
+    public function __construct(\Container $container)
     {
-        $this->authModel = $authModel;
+        $this->authModel = $container->authModel();
     }
 
     public function index()

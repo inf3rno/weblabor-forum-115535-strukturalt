@@ -6,9 +6,9 @@ class Router
     protected $urlPattern = '%^/([\w_-]+)\.php$%usD';
     protected $controller;
 
-    public function __construct(Controller\AuthController $controller)
+    public function __construct(Container $container)
     {
-        $this->controller = $controller;
+        $this->controller = $container->controller();
     }
 
     public function dispatch($url)

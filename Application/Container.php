@@ -5,31 +5,50 @@ class Container
 
     protected $directory;
     protected $router;
+    protected $controller;
+    protected $authModel;
+    protected $sessionStore;
+    protected $permanentStore;
+    protected $storeFile = 'store.json';
 
     public function __construct($directory)
     {
         $this->directory = $directory;
-        $this->router = new Router($this->controller());
     }
 
     public function router()
     {
+        if (!isset($this->router))
+            $this->router = new Router($this);
         return $this->router;
     }
 
-    protected function controller()
+    public function controller()
     {
-        $controller = new Controller\AuthController($this->authModel());
-        return $controller;
+        if (!isset($this->controller))
+            $this->controller = new Controller\AuthController($this);
+        return $this->controller;
     }
 
-    protected function authModel()
+    public function authModel()
     {
-        $authModel = new Model\AuthModel();
-        $authModel->setSessionStore(new Model\SessionStore());
-        $authModel->setPermanentStore(new Model\JsonStore($this->directory . DIRECTORY_SEPARATOR . 'store.json'));
-        return $authModel;
+        if (!isset($this->authModel))
+            $this->authModel = new Model\AuthModel($this);
+        return $this->authModel;
     }
 
+    public function sessionStore()
+    {
+        if (!isset($this->sessionStore))
+            $this->sessionStore = new Model\SessionStore();
+        return $this->sessionStore;
+    }
+
+    public function permanentStore()
+    {
+        if (!isset($this->permanentStore))
+            $this->permanentStore = new Model\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
+        return $this->permanentStore;
+    }
 
 }

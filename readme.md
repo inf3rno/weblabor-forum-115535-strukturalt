@@ -7,9 +7,16 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Az AuthModel és a Store példányok közvetlen átadása helyett adjuk át magát a Container-t.
+Csináljunk sima osztályt az összes statikusból. Aminél olyanok a konstansok, azokat tegyük be a Container-be.
+
+&#8730; Az AuthModel és a Store példányok közvetlen átadása helyett adjuk át magát a Container-t.
 
     Így nem kell bajlódni azzal, hogy egy csomó setter metódust vagy constructor paramétert adjunk meg.
+    Mellesleg gyorsabb lesz a kód tőle, mert nem példányosítja az egyes osztályokat, csak amikor szükség van rájuk.
+    A Container-ben a sok !isset-es ismétlődést csak úgy lehet kiváltani, ha __call-ra tesszük az adatok kérését.
+    A __call esetében viszont elveszik többek között az automatikus kiegészítés.
+    További hátránya a mostani változatnak, hogy nincs típusellenőrzés a container-rel megadott paraméterekre.
+    A típusellenőrzést az egyes osztályokbak setterekkel lehet megoldani. Nekem most nincs rá szükségem, mert kicsi a kód.
 
 &#8730; El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen másik Store interface-t implementáló megoldásra.
 

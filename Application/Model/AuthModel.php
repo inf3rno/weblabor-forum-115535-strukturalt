@@ -8,14 +8,10 @@ class AuthModel
     protected $session;
     protected $permanent;
 
-    public function setSessionStore(Store $session)
+    public function __construct(\Container $container)
     {
-        $this->session = $session;
-    }
-
-    public function setPermanentStore(Store $permanent)
-    {
-        $this->permanent = $permanent;
+        $this->session = $container->sessionStore();
+        $this->permanent = $container->permanentStore();
     }
 
     public function authorized()
