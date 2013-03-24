@@ -20,6 +20,14 @@ class AuthView
     static protected $updateFormButton = 'Módosítás';
     static protected $updateSuccessMessage = 'Sikeres jelszó csere.';
 
+    static protected $profileUrl = '/profile.php';
+    static protected $authUrl = '/';
+
+    static public function toAuth()
+    {
+        Html::redirect(static::$authUrl);
+    }
+
     static public function authPage()
     {
         $params = array(static::$loginUrl, static::$loginFormHeader, static::$loginFormButton);
@@ -27,6 +35,11 @@ class AuthView
         Html::skeleton(static::$authTitle, function () use ($params) {
             Html::form($params[0], $params[1], $params[2]);
         });
+    }
+
+    static public function toProfile()
+    {
+        Html::redirect(static::$profileUrl);
     }
 
     static public function profilePage($updated = false)
@@ -42,6 +55,7 @@ class AuthView
                 Html::message($messageParam);
         });
     }
+
 
 }
 

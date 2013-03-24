@@ -3,6 +3,11 @@
 namespace View;
 
 class Html {
+    static public function redirect($url)
+    {
+        header('location: ' . $url);
+    }
+
     static public function skeleton($title, $content)
     {
         header('content-type: text/html; charset=utf-8');

@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Emeljük ki a konstansokat külön osztályváltozókba.
+Csináljunk külön osztályt az autoloader-hez is, tegyük az Application mappába az alkalmazásunkat, hogy a Router ne az index.php-val legyen egy szinten.
+
+&#8730; Emeljük ki a konstansokat külön osztályváltozókba.
 
     Az AuthView-nál látható, hogy elég nehezen boldogulunk a konstansok átadásával. Azért egy kis trükközéssel megoldható.
     A Redirect kódja rossz helyen van. Ezt többek között abból látni, hogy hasonlóak a konstansok, mint az AuthView-nál.

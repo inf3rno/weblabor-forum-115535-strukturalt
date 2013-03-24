@@ -16,7 +16,7 @@ class AuthController
     static public function login()
     {
         if (AuthModel::authorized() || AuthModel::login(Input::password()))
-            Redirect::toProfile();
+            AuthView::toProfile();
         else
             AuthView::authPage();
     }
@@ -25,8 +25,7 @@ class AuthController
     {
         if (AuthModel::authorized())
             AuthModel::logout();
-        Redirect::toAuth();
-
+        AuthView::toAuth();
     }
 
     static public function profile()
@@ -34,7 +33,7 @@ class AuthController
         if (AuthModel::authorized())
             AuthView::profilePage(AuthModel::update(Input::password()));
         else
-            Redirect::toAuth();
+            AuthView::toAuth();
     }
 }
 
