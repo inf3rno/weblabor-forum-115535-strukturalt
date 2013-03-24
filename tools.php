@@ -55,6 +55,10 @@ function update($data){
     return $success;
 }
 
+function logout(){
+    $_SESSION['authorized'] = false;
+}
+
 function createHash($password)
 {
     $salt = 'titkos';
@@ -65,12 +69,12 @@ function createHash($password)
 
 function redirectToProfile()
 {
-    header('location: profile.php');
+    header('location: /profile.php');
 }
 
 function redirectToLogin()
 {
-    header('location: index.php');
+    header('location: /');
 }
 
 function displayLoginForm ()
@@ -117,7 +121,7 @@ header('content-type: text/html; charset=utf-8');
 </head>
 <body>
 <h1>Profil oldal</h1>
-<a href="logout.php">kijelentkezés</a>
+<a href="/logout.php">kijelentkezés</a>
 <form action="profile.php" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
     <table>
         <thead>
