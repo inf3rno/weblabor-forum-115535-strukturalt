@@ -14,7 +14,6 @@ class Container
     protected $sessionStore;
     protected $permanentStore;
     protected $encryptor;
-    protected $html;
     protected $storeFile = 'store.json';
     protected $salt = 'titkos';
 
@@ -77,13 +76,6 @@ class Container
         if (!isset($this->encryptor))
             $this->encryptor = new Core\Model\Encryptor\Sha1Encryptor($this->salt);
         return $this->encryptor;
-    }
-
-    public function html()
-    {
-        if (!$this->html)
-            $this->html = new Core\View\Html();
-        return $this->html;
     }
 
 }
