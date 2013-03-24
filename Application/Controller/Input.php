@@ -8,11 +8,15 @@ class Input
 
     static public function password()
     {
-        if (!isset($_POST[static::$passwordField]))
+        try {
+            if (!isset($_POST[static::$passwordField]))
+                throw new InputException();
+            if (!is_string($_POST[static::$passwordField]))
+                throw new InputException();
+            return $_POST[static::$passwordField];
+        } catch (InputException $e) {
             return false;
-        if (!is_string($_POST[static::$passwordField]))
-            return false;
-        return $_POST[static::$passwordField];
+        }
     }
 }
 
