@@ -4,21 +4,15 @@ namespace View;
 
 abstract class AbstractView implements View
 {
-    static protected $url;
-    static protected $title;
-    static protected $content;
+    protected $title;
+    protected $content;
 
-    static public function redirect()
+    public function display()
     {
-        Html::redirect(static::$url);
+        $this->build();
+        Html::skeleton($this->title, $this->content);
     }
 
-    static public function display()
-    {
-        static::build();
-        Html::skeleton(static::$title, static::$content);
-    }
-
-    abstract static protected function build();
+    abstract protected function build();
 
 }

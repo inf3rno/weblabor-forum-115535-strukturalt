@@ -4,14 +4,14 @@ namespace View;
 
 class NoStoreAuthView extends AuthView
 {
-    static protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
+    protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
 
-    static protected function build()
+    protected function build()
     {
         parent::build();
-        $content = static::$content;
-        $message = static::$message;
-        static::$content = function () use ($content, $message) {
+        $content = $this->content;
+        $message = $this->message;
+        $this->content = function () use ($content, $message) {
             $content();
             Html::message($message);
         };

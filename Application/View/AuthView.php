@@ -4,17 +4,16 @@ namespace View;
 
 class AuthView extends AbstractView
 {
-    static protected $url = '/';
-    static protected $title = 'Bejelentkezés';
+    protected $title = 'Bejelentkezés';
 
-    static protected $loginUrl = '/';
-    static protected $loginFormHeader = 'Azonosító űrlap';
-    static protected $loginFormButton = 'Bejelentkezés';
+    protected $loginUrl = '/';
+    protected $loginFormHeader = 'Azonosító űrlap';
+    protected $loginFormButton = 'Bejelentkezés';
 
-    static protected function build()
+    protected function build()
     {
-        $params = array(static::$loginUrl, static::$loginFormHeader, static::$loginFormButton);
-        static::$content = function () use ($params) {
+        $params = array($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
+        $this->content = function () use ($params) {
             Html::form($params[0], $params[1], $params[2]);
         };
     }

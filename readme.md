@@ -7,7 +7,11 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Statikus metódus nem lehet absztrakt, emiatt hibát kapok az AbstractView-nál. Át kell írni nem statikusra a View osztályokat.
+El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen másik Store interface-t implementáló megoldásra.
+
+&#8730; Némileg zavaró az újrahasznosításnál, hogy ki kell írni, hogy redirect vagy display. Csinálni kellene külön RedirectView-okat.
+
+&#8730; Statikus metódus nem lehet absztrakt, emiatt hibát kapok az AbstractView-nál. Át kell írni nem statikusra a View osztályokat.
 
 &#8730; Üzenetküldés a hibák okáról.
 

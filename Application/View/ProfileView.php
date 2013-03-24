@@ -4,21 +4,20 @@ namespace View;
 
 class ProfileView extends AbstractView
 {
-    static protected $url = '/profile.php';
-    static protected $title = 'Profil oldal';
+    protected $title = 'Profil oldal';
 
-    static protected $logoutUrl = '/logout.php';
-    static protected $logoutLinkLabel = 'kijelentkezés';
+    protected $logoutUrl = '/logout.php';
+    protected $logoutLinkLabel = 'kijelentkezés';
 
-    static protected $updateUrl = '/profile.php';
-    static protected $updateFormHeader = 'Jelszó módosító űrlap';
-    static protected $updateFormButton = 'Módosítás';
+    protected $updateUrl = '/profile.php';
+    protected $updateFormHeader = 'Jelszó módosító űrlap';
+    protected $updateFormButton = 'Módosítás';
 
-    static protected function build()
+    protected function build()
     {
-        $linkParams = array(static::$logoutUrl, static::$logoutLinkLabel);
-        $formParams = array(static::$updateUrl, static::$updateFormHeader, static::$updateFormButton);
-        static::$content = function () use ($linkParams, $formParams) {
+        $linkParams = array($this->logoutUrl, $this->logoutLinkLabel);
+        $formParams = array($this->updateUrl, $this->updateFormHeader, $this->updateFormButton);
+        $this->content = function () use ($linkParams, $formParams) {
             Html::link($linkParams[0], $linkParams[1]);
             Html::form($formParams[0], $formParams[1], $formParams[2]);
         };

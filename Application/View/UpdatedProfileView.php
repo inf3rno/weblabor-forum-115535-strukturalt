@@ -4,14 +4,14 @@ namespace View;
 
 class UpdatedProfileView extends ProfileView
 {
-    static protected $message = 'Sikeres jelszó csere.';
+    protected $message = 'Sikeres jelszó csere.';
 
-    static protected function build()
+    protected function build()
     {
         parent::build();
-        $content = static::$content;
-        $message = static::$message;
-        static::$content = function () use ($content, $message) {
+        $content = $this->content;
+        $message = $this->message;
+        $this->content = function () use ($content, $message) {
             $content();
             Html::message($message);
         };

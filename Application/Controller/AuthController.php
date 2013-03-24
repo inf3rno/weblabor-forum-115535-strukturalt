@@ -5,9 +5,11 @@ namespace Controller;
 use Model\AuthException;
 use Model\AuthModel;
 use Model\StoreException;
+use View\AuthRedirect;
 use View\AuthView;
 use View\NoStoreAuthView;
 use View\NoStoreProfileView;
+use View\ProfileRedirect;
 use View\ProfileView;
 use View\RejectedAuthView;
 use View\UpdatedProfileView;
@@ -24,14 +26,15 @@ class AuthController
         try {
             if (!AuthModel::authorized())
                 AuthModel::login(Input::password());
-            ProfileView::redirect();
+            $view = new ProfileRedirect();
         } catch (InputException $e) {
-            AuthView::display();
+            $view = new AuthView();
         } catch (StoreException $e) {
-            NoStoreAuthView::display();
+            $view = new NoStoreAuthView();
         } catch (AuthException $e) {
-            RejectedAuthView::display();
+            $view = new RejectedAuthView();
         }
+        $view->display();
     }
 
     static public function logout()
@@ -41,7 +44,8 @@ class AuthController
                 AuthModel::logout();
         } catch (StoreException $e) {
         }
-        AuthView::redirect();
+        $view = new AuthRedirect();
+        $view->display();
     }
 
     static public function profile()
@@ -50,14 +54,15 @@ class AuthController
             if (!AuthModel::authorized())
                 throw new AuthException('No permission.');
             AuthModel::update(Input::password());
-            UpdatedProfileView::display();
+            $view = new UpdatedProfileView();
         } catch (InputException $e) {
-            ProfileView::display();
+            $view = new ProfileView();
         } catch (StoreException $e) {
-            NoStoreProfileView::display();
+            $view = new NoStoreProfileView();
         } catch (AuthException $e) {
-            AuthView::redirect();
+            $view = new AuthRedirect();
         }
+        $view->display();
     }
 }
 
