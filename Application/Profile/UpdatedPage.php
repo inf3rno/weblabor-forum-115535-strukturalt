@@ -2,9 +2,9 @@
 
 namespace Application\Profile;
 
-class NoStoreView extends View
+class UpdatedPage extends Page
 {
-    protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
+    protected $message = 'Sikeres jelszó csere.';
 
     public function build()
     {

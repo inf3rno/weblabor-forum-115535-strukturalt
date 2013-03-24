@@ -11,12 +11,10 @@ class Controller
 {
     protected $authModel;
     protected $input;
-    protected $container;
 
     public function __construct(Container $container)
     {
         $this->authModel = $container->authModel();
-        $this->container = $container;
         $this->input = new Input();
     }
 
@@ -30,13 +28,13 @@ class Controller
         try {
             if (!$this->authModel->authorized())
                 $this->authModel->login($this->input->password());
-            $view = new Redirect($this->container);
+            $view = new Redirect();
         } catch (InputException $e) {
-            $view = new View($this->container);
+            $view = new Page();
         } catch (StoreException $e) {
-            $view = new NoStoreView($this->container);
+            $view = new NoStorePage();
         } catch (AuthException $e) {
-            $view = new RejectedView($this->container);
+            $view = new RejectedPage();
         }
         $view->display();
     }
@@ -48,7 +46,7 @@ class Controller
                 $this->authModel->logout();
         } catch (StoreException $e) {
         }
-        $view = new Redirect($this->container);
+        $view = new Redirect();
         $view->display();
     }
 

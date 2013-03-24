@@ -14,13 +14,11 @@ class Controller
     protected $authModel;
     protected $profileModel;
     protected $input;
-    protected $container;
 
     public function __construct(Container $container)
     {
         $this->authModel = $container->authModel();
         $this->profileModel = $container->profileModel();
-        $this->container = $container;
         $this->input = new Input();
     }
 
@@ -30,13 +28,13 @@ class Controller
             if (!$this->authModel->authorized())
                 throw new AuthException('No permission.');
             $this->profileModel->update($this->input->password());
-            $view = new UpdatedView($this->container);
+            $view = new UpdatedPage();
         } catch (InputException $e) {
-            $view = new View($this->container);
+            $view = new Page();
         } catch (StoreException $e) {
-            $view = new NoStoreView($this->container);
+            $view = new NoStorePage();
         } catch (AuthException $e) {
-            $view = new Redirect($this->container);
+            $view = new Redirect();
         }
         $view->display();
     }

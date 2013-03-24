@@ -2,9 +2,9 @@
 
 namespace Application\Profile;
 
-use Application\Core\View\AbstractView;
+use Application\Core\View\AbstractPage;
 
-class View extends AbstractView
+class Page extends AbstractPage
 {
     protected $title = 'Profil oldal';
 

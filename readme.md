@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-A Container átadása a View-oknak nagyon sokszor szerepel a kódokban. Ezzel lehetne valamit kezdeni...
+A View-oknál a hibaüzeneteket jobb, ha konstruktorral injektálom be, mint hogy emiatt külön osztályok legyenek.
+
+&#8730; A Container átadása a View-oknak nagyon sokszor szerepel a kódokban. Ezzel lehetne valamit kezdeni...
 
     A html-t lehetne példányosítani az AbstractView-ban is akár, úgy eltűnne ez a probléma.
 

@@ -2,9 +2,9 @@
 
 namespace Application\Auth;
 
-class NoStoreView extends View
+class RejectedPage extends Page
 {
-    protected $message = 'Nem sikerült kapcsolatot létesíteni az adattárolóval.';
+    protected $message = 'Nem sikerült bejelentkezni a jelszóval.';
 
     public function build()
     {
