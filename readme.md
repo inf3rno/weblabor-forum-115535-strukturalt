@@ -17,6 +17,12 @@ El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen 
     Tegyük egy absztrakciós szinttel feljebb a Store példányosítást.
     Máris egy fokkal jobb, most viszont a Controller-be került a példányosítás, ami szintén nem jó.
     Tegyük még feljebb. Most a Router-ben van. Ott már majdnem jó, de az is két dolgot csinálna, tegyük még feljebb.
+    A Bootstrap-ben sincs jó helyen, mert ő az autoload-ot állítja be, az absztrakciós szint viszont megfelelő.
+    Ezt onnan látni, hogy már a Router-nél eltűnt a példány meglétét ellenőrző feltétel.
+    Szóval a Bootstrap alatt van a megfelelő helye a Routerrel egy szinten.
+    Az Autoload-nak is lehet csinálni egy külön osztályt, az is ugyanazon az absztrakciós szinten kell, hogy legyen.
+    Most szét van szedve rendesen a példányosítás, de még mindig a Bootstrap-ban van, így az túl sok dolgot csinál.
+    Ki kell emelni egy IoC container-be a példányosítást ahhoz, hogy minden okés legyen.
 
 &#8730; Némileg zavaró az újrahasznosításnál, hogy ki kell írni, hogy redirect vagy display. Csinálni kellene külön RedirectView-okat.
 

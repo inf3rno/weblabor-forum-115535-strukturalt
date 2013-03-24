@@ -2,29 +2,22 @@
 
 class Router
 {
-    static protected $defaultHandler = 'index';
-    static protected $urlPattern = '%^/([\w_-]+)\.php$%usD';
+    protected $defaultAction = 'index';
+    protected $urlPattern = '%^/([\w_-]+)\.php$%usD';
+    protected $controller;
 
-    static public function dispatch()
+    public function __construct(Controller\AuthController $controller)
     {
-        if (preg_match(static::$urlPattern, $_SERVER['REQUEST_URI'], $matches))
-            $handler = $matches[1];
-        else
-            $handler = static::$defaultHandler;
-
-        $controller = static::createController();
-        if (!method_exists($controller, $handler))
-            $handler = static::$defaultHandler;
-        $controller->$handler();
+        $this->controller = $controller;
     }
 
-    static protected function createController()
+    public function dispatch($url)
     {
-        $authModel = new Model\AuthModel();
-        $authModel->setSessionStore(new Model\SessionStore());
-        $authModel->setPermanentStore(new Model\JsonStore('Application/store.json'));
-        $controller = new Controller\AuthController($authModel);
-        return $controller;
+        $action = $this->defaultAction;
+        if (preg_match($this->urlPattern, $url, $matches))
+            $action = $matches[1];
+        if (!method_exists($this->controller, $action))
+            $action = $this->defaultAction;
+        $this->controller->$action();
     }
-
 }

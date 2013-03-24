@@ -2,22 +2,37 @@
 
 class Bootstrap
 {
-    static protected $extension = '.php';
-
-    static public function run()
+    public function __construct()
     {
-        static::autoload(__DIR__, static::$extension);
-        Router::dispatch();
+        $this->autoLoad();
+        $this->router()->dispatch($_SERVER['REQUEST_URI']);
     }
 
-    static protected function autoload($directory, $extension)
+    protected function autoLoad()
     {
-        spl_autoload_register(function ($class) use ($directory, $extension) {
-            $nodes = explode('\\', $class);
-            $path = $directory . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $nodes) . $extension;
-            if (file_exists($path))
-                require_once($path);
-        }, true);
+        require_once(__DIR__ . '/AutoLoad.php');
+        $autoLoad = new AutoLoad();
+        $autoLoad->register(__DIR__);
+    }
+
+    protected function authModel()
+    {
+        $authModel = new Model\AuthModel();
+        $authModel->setSessionStore(new Model\SessionStore());
+        $authModel->setPermanentStore(new Model\JsonStore(__DIR__ . '/store.json'));
+        return $authModel;
+    }
+
+    protected function controller()
+    {
+        $controller = new Controller\AuthController($this->authModel());
+        return $controller;
+    }
+
+    protected function router()
+    {
+        $router = new Router($this->controller());
+        return $router;
     }
 
 }
