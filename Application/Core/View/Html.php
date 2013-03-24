@@ -18,7 +18,7 @@ class Html {
         </head>
         <body>
         <h1><?php echo $title; ?></h1>
-        <?php $content(); ?>
+        <?php call_user_func($content); ?>
         </body>
         </html><?php
     }

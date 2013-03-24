@@ -8,7 +8,6 @@ abstract class AbstractView implements View
 {
     protected $html;
     protected $title;
-    protected $content;
 
     public function __construct(Container $container)
     {
@@ -17,10 +16,9 @@ abstract class AbstractView implements View
 
     public function display()
     {
-        $this->build();
-        $this->html->skeleton($this->title, $this->content);
+        $this->html->skeleton($this->title, array($this, 'build'));
     }
 
-    abstract protected function build();
+    abstract public function build();
 
 }

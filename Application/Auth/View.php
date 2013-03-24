@@ -12,13 +12,9 @@ class View extends AbstractView
     protected $loginFormHeader = 'Azonosító űrlap';
     protected $loginFormButton = 'Bejelentkezés';
 
-    protected function build()
+    public function build()
     {
-        $html = $this->html;
-        $params = array($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
-        $this->content = function () use ($html, $params) {
-            $html->form($params[0], $params[1], $params[2]);
-        };
+        $this->html->form($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
     }
 }
 

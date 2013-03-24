@@ -7,7 +7,11 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-A view-nál érdemes lenne eltüntetni az anonim függvényt, és egy metódust betenni a helyére callback-nek.
+A Container átadása a View-oknak nagyon sokszor szerepel a kódokban. Ezzel lehetne valamit kezdeni...
+
+    A html-t lehetne példányosítani az AbstractView-ban is akár, úgy eltűnne ez a probléma.
+
+&#8730; A view-nál érdemes lenne eltüntetni az anonim függvényt, és egy metódust betenni a helyére callback-nek.
 
 &#8730; Sok a Profile-al kapcsolatos use bejegyzés az AuthController-ben. Át kell rakni másik Controller-be a profile action-t.
 

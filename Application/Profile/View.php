@@ -15,17 +15,11 @@ class View extends AbstractView
     protected $updateFormHeader = 'Jelszó módosító űrlap';
     protected $updateFormButton = 'Módosítás';
 
-    protected function build()
+    public function build()
     {
-        $html = $this->html;
-        $linkParams = array($this->logoutUrl, $this->logoutLinkLabel);
-        $formParams = array($this->updateUrl, $this->updateFormHeader, $this->updateFormButton);
-        $this->content = function () use ($html, $linkParams, $formParams) {
-            $html->link($linkParams[0], $linkParams[1]);
-            $html->form($formParams[0], $formParams[1], $formParams[2]);
-        };
+        $this->html->link($this->logoutUrl, $this->logoutLinkLabel);
+        $this->html->form($this->updateUrl, $this->updateFormHeader, $this->updateFormButton);
     }
-
 
 }
 
