@@ -12,9 +12,10 @@ class AuthView extends AbstractView
 
     protected function build()
     {
+        $html = $this->html;
         $params = array($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
-        $this->content = function () use ($params) {
-            Html::form($params[0], $params[1], $params[2]);
+        $this->content = function () use ($html, $params) {
+            $html->form($params[0], $params[1], $params[2]);
         };
     }
 }

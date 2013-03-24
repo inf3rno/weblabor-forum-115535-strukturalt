@@ -3,12 +3,12 @@
 namespace View;
 
 class Html {
-    static public function redirect($url)
+    public function redirect($url)
     {
         header('location: ' . $url);
     }
 
-    static public function skeleton($title, $content)
+    public function skeleton($title, $content)
     {
         header('content-type: text/html; charset=utf-8');
         ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -23,7 +23,7 @@ class Html {
         </html><?php
     }
 
-    static public function form($action, $header, $description)
+    public function form($action, $header, $description)
     {
         ?>
         <form action="<?php echo $action ?>" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
@@ -48,12 +48,12 @@ class Html {
         </form><?php
     }
 
-    static public function link($url, $label)
+    public function link($url, $label)
     {
         ?><a href="<?php echo $url ?>"><?php echo $label ?></a><?php
     }
 
-    static public function message($message)
+    public function message($message)
     {
         echo $message;
     }

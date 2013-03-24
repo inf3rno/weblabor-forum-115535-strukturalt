@@ -9,11 +9,12 @@ class NoStoreAuthView extends AuthView
     protected function build()
     {
         parent::build();
+        $html = $this->html;
         $content = $this->content;
         $message = $this->message;
-        $this->content = function () use ($content, $message) {
+        $this->content = function () use ($html, $content, $message) {
             $content();
-            Html::message($message);
+            $html->message($message);
         };
     }
 }

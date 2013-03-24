@@ -9,7 +9,10 @@ class Container
     protected $authModel;
     protected $sessionStore;
     protected $permanentStore;
+    protected $encryptor;
+    protected $html;
     protected $storeFile = 'store.json';
+    protected $salt = 'titkos';
 
     public function __construct($directory)
     {
@@ -49,6 +52,20 @@ class Container
         if (!isset($this->permanentStore))
             $this->permanentStore = new Model\JsonStore($this->directory . DIRECTORY_SEPARATOR . $this->storeFile);
         return $this->permanentStore;
+    }
+
+    public function encryptor()
+    {
+        if (!isset($this->encryptor))
+            $this->encryptor = new Model\Sha1Encryptor($this->salt);
+        return $this->encryptor;
+    }
+
+    public function html()
+    {
+        if (!$this->html)
+            $this->html = new View\Html();
+        return $this->html;
     }
 
 }

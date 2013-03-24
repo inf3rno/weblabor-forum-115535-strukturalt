@@ -15,11 +15,12 @@ class ProfileView extends AbstractView
 
     protected function build()
     {
+        $html = $this->html;
         $linkParams = array($this->logoutUrl, $this->logoutLinkLabel);
         $formParams = array($this->updateUrl, $this->updateFormHeader, $this->updateFormButton);
-        $this->content = function () use ($linkParams, $formParams) {
-            Html::link($linkParams[0], $linkParams[1]);
-            Html::form($formParams[0], $formParams[1], $formParams[2]);
+        $this->content = function () use ($html, $linkParams, $formParams) {
+            $html->link($linkParams[0], $linkParams[1]);
+            $html->form($formParams[0], $formParams[1], $formParams[2]);
         };
     }
 

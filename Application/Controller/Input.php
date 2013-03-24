@@ -4,15 +4,15 @@ namespace Controller;
 
 class Input
 {
-    static protected $passwordField = 'password';
+    protected $passwordField = 'password';
 
-    static public function password()
+    public function password()
     {
-        if (!isset($_POST[static::$passwordField]))
+        if (!isset($_POST[$this->passwordField]))
             throw new InputException('Field not sent.');
-        if (!is_string($_POST[static::$passwordField]))
+        if (!is_string($_POST[$this->passwordField]))
             throw new InputException('Field is not string; it is an array.');
-        return $_POST[static::$passwordField];
+        return $_POST[$this->passwordField];
     }
 }
 

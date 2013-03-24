@@ -16,10 +16,14 @@ use View\UpdatedProfileView;
 class AuthController
 {
     protected $authModel;
+    protected $input;
+    protected $container;
 
     public function __construct(\Container $container)
     {
         $this->authModel = $container->authModel();
+        $this->container = $container;
+        $this->input = new Input();
     }
 
     public function index()
@@ -31,14 +35,14 @@ class AuthController
     {
         try {
             if (!$this->authModel->authorized())
-                $this->authModel->login(Input::password());
-            $view = new ProfileRedirect();
+                $this->authModel->login($this->input->password());
+            $view = new ProfileRedirect($this->container);
         } catch (InputException $e) {
-            $view = new AuthView();
+            $view = new AuthView($this->container);
         } catch (StoreException $e) {
-            $view = new NoStoreAuthView();
+            $view = new NoStoreAuthView($this->container);
         } catch (AuthException $e) {
-            $view = new RejectedAuthView();
+            $view = new RejectedAuthView($this->container);
         }
         $view->display();
     }
@@ -50,7 +54,7 @@ class AuthController
                 $this->authModel->logout();
         } catch (StoreException $e) {
         }
-        $view = new AuthRedirect();
+        $view = new AuthRedirect($this->container);
         $view->display();
     }
 
@@ -59,14 +63,14 @@ class AuthController
         try {
             if (!$this->authModel->authorized())
                 throw new AuthException('No permission.');
-            $this->authModel->update(Input::password());
-            $view = new UpdatedProfileView();
+            $this->authModel->update($this->input->password());
+            $view = new UpdatedProfileView($this->container);
         } catch (InputException $e) {
-            $view = new ProfileView();
+            $view = new ProfileView($this->container);
         } catch (StoreException $e) {
-            $view = new NoStoreProfileView();
+            $view = new NoStoreProfileView($this->container);
         } catch (AuthException $e) {
-            $view = new AuthRedirect();
+            $view = new AuthRedirect($this->container);
         }
         $view->display();
     }

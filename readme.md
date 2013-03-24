@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Csináljunk sima osztályt az összes statikusból. Aminél olyanok a konstansok, azokat tegyük be a Container-be.
+Rendezzük egy kicsit a névtereket, hogy jobban látszódjon mi melyik réteghez tartozik.
+
+&#8730; Csináljunk sima osztályt az összes statikusból. Aminél olyanok a konstansok, azokat tegyük be a Container-be.
 
 &#8730; Az AuthModel és a Store példányok közvetlen átadása helyett adjuk át magát a Container-t.
 
