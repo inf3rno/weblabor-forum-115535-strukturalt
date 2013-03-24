@@ -1,17 +1,8 @@
 <?php
 
-session_start();
+require 'tools.php';
 
 if (authorized())
     $_SESSION['authorized'] = false;
 redirectToLogin();
 
-function authorized()
-{
-    return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
-}
-
-function redirectToLogin()
-{
-    header('location: index.php');
-}
