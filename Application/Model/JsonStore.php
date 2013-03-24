@@ -15,21 +15,21 @@ class JsonStore implements DataStore
     {
         $json = json_encode($data);
         if ($json === false)
-            return false;
-        $success = file_put_contents(static::$file, $json);
-        return $success;
+            throw new StoreException('Cannot encode json data.');
+        if (!file_put_contents(static::$file, $json))
+            throw new StoreException('Cannot write file: ' . static::$file);
     }
 
     static public function load()
     {
         if (!file_exists(static::$file))
-            return false;
+            return;
         $json = file_get_contents(static::$file);
         if ($json === false)
-            return false;
+            throw new StoreException('Cannot read file: ' . static::$file);
         $data = json_decode($json, true);
         if ($data === null)
-            return false;
+            throw new StoreException('Cannot decode json data.');
         return $data;
     }
 }

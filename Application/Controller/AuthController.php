@@ -2,7 +2,9 @@
 
 namespace Controller;
 
+use Model\AuthException;
 use Model\AuthModel;
+use Model\StoreException;
 use View\AuthView;
 use View\ProfileView;
 use View\UpdatedProfileView;
@@ -16,26 +18,44 @@ class AuthController
 
     static public function login()
     {
-        if (AuthModel::authorized() || AuthModel::login(Input::password()))
-            return ProfileView::redirect();
-        AuthView::display();
+        try {
+            if (!AuthModel::authorized())
+                AuthModel::login(Input::password());
+            ProfileView::redirect();
+        } catch (InputException $e) {
+            AuthView::display(); //nem küldtek űrlapot, vagy rossz űrlap
+        } catch (StoreException $e) {
+            //nem sikerült az adatok tárolása vagy kiolvasása
+        } catch (AuthException $e) {
+            AuthView::display(); //nem egyezik a jelszó a tárolttal
+        }
     }
 
     static public function logout()
     {
-        if (AuthModel::authorized())
-            AuthModel::logout();
-        AuthView::redirect();
+        try {
+            if (AuthModel::authorized())
+                AuthModel::logout();
+            AuthView::redirect();
+        } catch (StoreException $e) {
+            //nem sikerült az adatok tárolása vagy kiolvasása
+        }
     }
 
     static public function profile()
     {
-        if (!AuthModel::authorized())
-            return AuthView::redirect();
-        if (AuthModel::update(Input::password()))
+        try {
+            if (!AuthModel::authorized())
+                throw new AuthException('No permission.');
+            AuthModel::update(Input::password());
             UpdatedProfileView::display();
-        else
-            ProfileView::display();
+        } catch (InputException $e) {
+            ProfileView::display(); //nem küldtek űrlapot, vagy rossz űrlap
+        } catch (StoreException $e) {
+            //nem sikerült az adatok tárolása vagy kiolvasása
+        } catch (AuthException $e) {
+            AuthView::redirect(); //nincs jogosultság
+        }
     }
 }
 

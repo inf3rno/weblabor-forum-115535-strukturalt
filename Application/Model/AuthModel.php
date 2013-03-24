@@ -11,18 +11,17 @@ class AuthModel
         return SessionStore::load() === true;
     }
 
-    static public function login($password = false)
+    static public function login($password)
     {
-        if ($password !== false && Crypto::hash($password) === JsonStore::load())
+        if (Crypto::hash($password) === JsonStore::load())
             SessionStore::save(true);
-        return static::authorized();
+        else
+            throw new AuthException();
     }
 
-    static public function update($password = false)
+    static public function update($password)
     {
-        if ($password !== false)
-            return JsonStore::save(Crypto::hash($password));
-        return false;
+        JsonStore::save(Crypto::hash($password));
     }
 
     static public function logout()

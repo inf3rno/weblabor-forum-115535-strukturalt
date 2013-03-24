@@ -9,6 +9,10 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 Üzenetküldés a hibák okáról.
 
+    Beszórtam try-catch blokkba a controller-ben található kódot, leírtam a commentekben, hogy melyik mikor fut le.
+    Jelenleg még úgy tűnik, hogy ismétlődő kód van néhány helyen, de ez azért van, mert nem adtam át a hibaüzeneteket.
+    Az adat tárolási hibára nincs felkészítve a rendszer, azzal is kezdeni kell valamit.
+
 &#10005; A jelszó tároló osztály nem cserélhető ki valami könnyen, mert bele van kódolva az AuthModel-be a használata.
 
     Elég lenne azt beírni a kódba, hogy minden DataStore interface-t teljesítő osztályt használhat.

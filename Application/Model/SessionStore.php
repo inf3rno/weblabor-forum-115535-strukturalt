@@ -24,7 +24,8 @@ class SessionStore implements DataStore
     static protected function startIfNecessary()
     {
         if (!static::$started) {
-            session_start();
+            if (!session_start())
+                throw new StoreException('Cannot start session.');
             static::$started = true;
         }
     }
