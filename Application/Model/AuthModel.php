@@ -2,21 +2,19 @@
 
 namespace Model;
 
-session_start();
 
 class AuthModel
 {
-    static protected $stateKey = 'authorized';
 
     static public function authorized()
     {
-        return !empty($_SESSION[static::$stateKey]) && $_SESSION[static::$stateKey] === true;
+        return SessionStore::load() === true;
     }
 
     static public function login($password = false)
     {
         if ($password !== false && Crypto::hash($password) === JsonStore::load())
-            $_SESSION[static::$stateKey] = true;
+            SessionStore::save(true);
         return static::authorized();
     }
 
@@ -29,7 +27,7 @@ class AuthModel
 
     static public function logout()
     {
-        $_SESSION[static::$stateKey] = false;
+        SessionStore::save(false);
     }
 }
 
