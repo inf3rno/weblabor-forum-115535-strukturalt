@@ -7,7 +7,12 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Ki kell emelni az azonos kódot külön osztályba, hogy ne ismétlődjön.
+Nem tiszta az AbstractView szerkezete, a display metódus paraméter listája eltérő a ProfileView esetében.
+
+&#8730; Ki kell emelni az azonos kódot külön osztályba, hogy ne ismétlődjön.
+
+    A probléma itt az, hogy a külön osztálynak át kell adni a paramétereket. Így viszont értelmetlen létrehozni, mert nem változik semmit az azonos kód.
+    Helyette csináltam egy absztrakt osztályt, amitől örököltetem az azonos kódot, így mindkét leszármazott megkapja azt.
 
 &#8730; Az AuthView két dolgot csinál, kirajzolja a bejelentkezős oldalt és a profil oldalt is. Ez ütközik az SRP elvbe, szét kell vágni két osztályra.
 
