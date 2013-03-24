@@ -2,37 +2,16 @@
 
 class Bootstrap
 {
+
     public function __construct()
     {
-        $this->autoLoad();
-        $this->router()->dispatch($_SERVER['REQUEST_URI']);
-    }
+        require_once(__DIR__ . DIRECTORY_SEPARATOR . 'AutoLoad.php');
 
-    protected function autoLoad()
-    {
-        require_once(__DIR__ . '/AutoLoad.php');
         $autoLoad = new AutoLoad();
         $autoLoad->register(__DIR__);
-    }
 
-    protected function authModel()
-    {
-        $authModel = new Model\AuthModel();
-        $authModel->setSessionStore(new Model\SessionStore());
-        $authModel->setPermanentStore(new Model\JsonStore(__DIR__ . '/store.json'));
-        return $authModel;
-    }
-
-    protected function controller()
-    {
-        $controller = new Controller\AuthController($this->authModel());
-        return $controller;
-    }
-
-    protected function router()
-    {
-        $router = new Router($this->controller());
-        return $router;
+        $container = new Container(__DIR__);
+        $container->router()->dispatch($_SERVER['REQUEST_URI']);
     }
 
 }

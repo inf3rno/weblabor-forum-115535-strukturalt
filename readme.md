@@ -7,7 +7,11 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen másik Store interface-t implementáló megoldásra.
+Az AuthModel és a Store példányok közvetlen átadása helyett adjuk át magát a Container-t.
+
+    Így nem kell bajlódni azzal, hogy egy csomó setter metódust vagy constructor paramétert adjunk meg.
+
+&#8730; El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen másik Store interface-t implementáló megoldásra.
 
     Egyelőre betettem az AuthModel-be a Store példányosítást. Kénytelen voltam a bootstrapből kiszedni a json fájl helyét.
     A példányosítás nem az AuthModel feladata, ez több dologból is elég tisztán látszik.
@@ -23,6 +27,7 @@ El kell érni, hogy az AuthModel-ben cserélhető legyen a JsonStore bármilyen 
     Az Autoload-nak is lehet csinálni egy külön osztályt, az is ugyanazon az absztrakciós szinten kell, hogy legyen.
     Most szét van szedve rendesen a példányosítás, de még mindig a Bootstrap-ban van, így az túl sok dolgot csinál.
     Ki kell emelni egy IoC container-be a példányosítást ahhoz, hogy minden okés legyen.
+    A Container kódjának cserélésével esetleg config fájlba szervezésével így már tetszőleges Store beállítható.
 
 &#8730; Némileg zavaró az újrahasznosításnál, hogy ki kell írni, hogy redirect vagy display. Csinálni kellene külön RedirectView-okat.
 
