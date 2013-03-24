@@ -1,7 +1,12 @@
 <?php
 
-function createHash($password)
+namespace Model;
+
+class Crypto
 {
-    $salt = 'titkos';
-    return sha1(sha1($salt) . $password);
+    static public function createHash($password)
+    {
+        $salt = 'titkos';
+        return sha1(sha1($salt) . $password);
+    }
 }

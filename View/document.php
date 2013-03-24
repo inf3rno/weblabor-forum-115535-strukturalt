@@ -1,20 +1,25 @@
 <?php
 
-require_once 'html.php';
+namespace View;
 
-function displayLoginForm()
+class Document
 {
-    displaySkeleton('Bejelentkezés', function () {
-        displayForm('/index.php', 'Azonosító űrlap', 'Bejelentkezés');
-    });
+    static public function displayLoginForm()
+    {
+        Html::displaySkeleton('Bejelentkezés', function () {
+            Html::displayForm('/index.php', 'Azonosító űrlap', 'Bejelentkezés');
+        });
+    }
+
+    static public function displayUpdateForm($updated = false)
+    {
+        Html::displaySkeleton('Profil oldal', function () use ($updated) {
+            Html::displayLink('/logout.php', 'kijelentkezés');
+            Html::displayForm('/profile.php', 'Jelszó módosító űrlap', 'Módosítás');
+            if ($updated)
+                Html::displayMessage('Sikeres jelszó csere.');
+        });
+    }
+
 }
 
-function displayUpdateForm($updated = false)
-{
-    displaySkeleton('Profil oldal', function () use ($updated) {
-        displayLink('/logout.php', 'kijelentkezés');
-        displayForm('/profile.php', 'Jelszó módosító űrlap', 'Módosítás');
-        if ($updated)
-            displayMessage('Sikeres jelszó csere.');
-    });
-}

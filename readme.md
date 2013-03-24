@@ -7,7 +7,9 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Tegyük át névterekbe és osztályokba a mostani kódot, és írjunk hozzá autoloader-t. Úgy jobban követhetőek lesznek a függőségi viszonyok.
+Rendezzük egy kicsit a metódus- és osztályneveket.
+
+&#10005; Tegyük át névterekbe és osztályokba a mostani kódot, és írjunk hozzá autoloader-t. Úgy jobban követhetőek lesznek a függőségi viszonyok.
 
 &#10005; Csináljunk felhasználóbarát hibaüzenetet arról, hogy miért nem működött a bejelentkezés, vagy bármi egyéb. Loggoljuk a hibákat.
 
