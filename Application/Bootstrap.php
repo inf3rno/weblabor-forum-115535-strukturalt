@@ -7,6 +7,7 @@ class Bootstrap
     static public function run()
     {
         static::autoload(__DIR__, static::$extension);
+        Model\DataStore::configure(__DIR__ . '/store.json');
         Router::dispatch();
     }
 

@@ -4,7 +4,12 @@ namespace Model;
 
 class DataStore
 {
-    static protected $file = 'Application/store.json';
+    static protected $file;
+
+    static public function configure($file)
+    {
+        static::$file = $file;
+    }
 
     static public function save($data)
     {
