@@ -7,7 +7,8 @@ A login csak jelszót kér be, amit magának küld el, és összehasonlítja az 
 
 **Flow**
 
-Dolgozzunk még egy kicsit az ismétlődések eltüntetésén.
+Tegyük külön fájlokba az egyes rétegeket.
+&#8730; Dolgozzunk még egy kicsit az ismétlődések eltüntetésén.
 &#8730; A kód ismétlődéseket tegyük ki külön fájlokba.
 &#8730; Adjunk hozzá logout lehetőséget.
 &#8730; Adjuk hozzá az állapot tárolását a munkamenetben.

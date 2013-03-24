@@ -6,7 +6,8 @@
 
 session_start();
 
-function authorized(){
+function authorized()
+{
     return !empty($_SESSION['authorized']) && $_SESSION['authorized'] === true;
 }
 
@@ -21,7 +22,8 @@ function login()
     return true;
 }
 
-function update(){
+function update()
+{
     $password = passwordInput();
     if ($password === false)
         return false;
@@ -29,13 +31,15 @@ function update(){
     return $success;
 }
 
-function logout(){
+function logout()
+{
     $_SESSION['authorized'] = false;
 }
 
 //űrlap adatok beolvasása
 
-function passwordInput(){
+function passwordInput()
+{
     if (!isset($_POST['password']))
         return false;
     if (!is_string($_POST['password']))
@@ -45,12 +49,14 @@ function passwordInput(){
 
 //jelszó mentés és összehasonlítás
 
-function save($password){
+function save($password)
+{
     $config = array('hash' => createHash($password));
     return writeConfig($config);
 }
 
-function validate($password){
+function validate($password)
+{
     $hash = createHash($password);
     $config = readConfig();
     if ($config === false)
@@ -70,7 +76,8 @@ function createHash($password)
 
 //jelszó tároló fájl mentése és beolvasása
 
-function writeConfig($config){
+function writeConfig($config)
+{
     $configJson = json_encode($config);
     if ($configJson === false)
         return false;
@@ -79,7 +86,8 @@ function writeConfig($config){
     return $success;
 }
 
-function readConfig(){
+function readConfig()
+{
     $configFile = 'config.json';
     if (!file_exists($configFile))
         return false;
@@ -98,84 +106,84 @@ function readConfig(){
 
 function redirectToProfile()
 {
-    header('location: /profile.php');
+    redirect('/profile.php');
 }
 
 function redirectToLogin()
 {
-    header('location: /');
+    redirect('/');
+}
+
+function redirect($url){
+    header('location: '.$url);
 }
 
 //űrlapok
 
-function displayLoginForm ()
+function displayLoginForm()
 {
-header('content-type: text/html; charset=utf-8');
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-    <title>Példa - Bejelentkezés</title>
-</head>
-<body>
-<form action="index.php" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
-    <table>
-        <thead>
-        <tr>
-            <td>Azonosító űrlap</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><label for="password">Jelszó</label></td>
-            <td><input type="password" name="password" value=""></td>
-        </tr>
-        <tr>
-            <td class="double" colspan="2">
-                <button>Bejelentkezés</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
-</body>
-</html><?php
+    displaySkeleton('Bejelentkezés', function () {
+        displayForm('/index.php', 'Azonosító űrlap', 'Bejelentkezés');
+    });
 }
 
 
-function displayUpdateForm ($updated = false)
+function displayUpdateForm($updated = false)
 {
-header('content-type: text/html; charset=utf-8');
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-    <title>Példa - Profil oldal</title>
-</head>
-<body>
-<h1>Profil oldal</h1>
-<a href="/logout.php">kijelentkezés</a>
-<form action="profile.php" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
+    displaySkeleton('Profil oldal', function () use ($updated) {
+        displayLink('/logout.php', 'kijelentkezés');
+        displayForm('/profile.php', 'Jelszó módosító űrlap', 'Módosítás');
+        if ($updated)
+            displayMessage('Sikeres jelszó csere.');
+    });
+}
+
+//komponensek
+
+function displaySkeleton($title, $displayContent)
+{
+    header('content-type: text/html; charset=utf-8');
+    ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+    <html>
+    <head>
+        <title>Példa - <?php echo $title; ?></title>
+    </head>
+    <body>
+    <h1><?php echo $title; ?></h1>
+    <?php $displayContent(); ?>
+    </body>
+    </html><?php
+}
+
+function displayForm($action, $header, $description)
+{
+    ?>
+    <form action="<?php echo $action ?>" method="post" enctype="application/x-www-form-urlencoded; charset=utf-8">
     <table>
         <thead>
         <tr>
-            <td>Jelszó módosító űrlap</td>
+            <td><?php echo $header ?></td>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td><label for="password">Jelszó</label></td>
+            <td><label for="password"> Jelszó</label></td>
             <td><input type="password" name="password" value=""></td>
         </tr>
         <tr>
             <td class="double" colspan="2">
-                <button>Módosítás</button>
+                <button><?php echo $description ?></button>
             </td>
         </tr>
         </tbody>
     </table>
-</form>
-<?php if ($updated) { ?>
-    Sikeres jelszó csere.
-<?php } ?>
-</body>
-</html><?php
+    </form><?php
+}
+
+function displayLink($url, $label){
+    ?><a href="<?php echo $url ?>"><?php echo $label ?></a><?php
+}
+
+function displayMessage($message){
+    echo $message;
 }
