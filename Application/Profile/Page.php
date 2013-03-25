@@ -28,5 +28,15 @@ class Page extends AbstractPage
         $this->message();
     }
 
+    public function noStore()
+    {
+        $this->flash('noStore');
+    }
+
+    public function updated()
+    {
+        $this->flash('updated');
+    }
+
 }
 

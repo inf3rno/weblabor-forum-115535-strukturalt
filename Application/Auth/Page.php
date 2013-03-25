@@ -22,5 +22,15 @@ class Page extends AbstractPage
         $this->html->form($this->loginUrl, $this->loginFormHeader, $this->loginFormButton);
         $this->message();
     }
+
+    public function noStore()
+    {
+        $this->flash('noStore');
+    }
+
+    public function rejected()
+    {
+        $this->flash('rejected');
+    }
 }
 

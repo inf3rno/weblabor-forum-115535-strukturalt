@@ -8,12 +8,6 @@ abstract class AbstractPage extends AbstractView
     protected $messages = array();
     protected $code;
 
-    public function __construct($code = null)
-    {
-        parent::__construct();
-        $this->code = $code;
-    }
-
     public function display()
     {
         $this->html->skeleton($this->title, array($this, 'build'));
@@ -21,7 +15,12 @@ abstract class AbstractPage extends AbstractView
 
     abstract public function build();
 
-    public function message()
+    protected function flash($code)
+    {
+        $this->code = $code;
+    }
+
+    protected function message()
     {
         if (isset($this->messages[$this->code]))
             $this->html->message($this->messages[$this->code]);
